@@ -62,6 +62,9 @@ app.get("/register", (req, res) => {
 app.get("/new", (req, res) => {
   res.render("new");
 });
+app.get("/favourites", (req, res) => {
+  res.render("favourites");
+});
 
 
 
