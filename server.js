@@ -43,12 +43,14 @@ app.use(cookieSession({
 const homeRoutes = require("./routes/home");
 const widgetsRoutes = require("./routes/widgets");
 const searchRoutes = require("./routes/search");
+const searchListingRoutes = require("./routes/search-listing")
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/home", homeRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/search", searchRoutes(db));
+app.use("/api/", searchListingRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
