@@ -42,11 +42,13 @@ app.use(cookieSession({
 // Note: Feel free to replace the example routes below with your own
 const homeRoutes = require("./routes/home");
 const widgetsRoutes = require("./routes/widgets");
+const searchRoutes = require("./routes/search");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/home", homeRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/search", searchRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -59,12 +61,6 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
-});
-
-
-app.get("/search", (req, res) => {
-
-  res.render("search");
 });
 
 
