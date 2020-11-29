@@ -38,15 +38,16 @@ app.use(cookieSession({
   keys: ['key1', 'key2']
 }))
 
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const homeRoutes = require("./routes/home");
+const RegisterRoutes = require("./routes/register");
 const widgetsRoutes = require("./routes/widgets");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/home", homeRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/register", RegisterRoutes(db));
+app.use("/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -56,9 +57,7 @@ app.use("/api/widgets", widgetsRoutes(db));
 app.get("/", (req, res) => {
   res.render("index");
 });
-app.get("/register", (req, res) => {
-  res.render("register");
-});
+
 app.get("/new", (req, res) => {
   res.render("new");
 });

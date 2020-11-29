@@ -8,10 +8,15 @@
 const express = require('express');
 const router  = express.Router();
 
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.send("Hello")
+    res.render("register");
   });
+  router.post("/",(req,res)=>{
+    const {userName,email,password} = req.body;
+    console.log(userName,email,password);
+  })
   return router;
 };
 
