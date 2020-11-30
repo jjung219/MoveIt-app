@@ -4,16 +4,17 @@ const router  = express.Router();
 module.exports = (db) => {
   router.post ("/:id/delete", (req, res) => {
     const userId = req.session['user_id'];
-    console.log(req.params);
-    // res.send("delete ok!")
+    const itemId = req.params.id;
 
-    // const queryString = `
-    //   DELETE *
-    //   FROM items
-    //   WHERE user_id = ${userId}
-    //   AND id =
-    // `;
+    const queryString = `
+      DELETE *
+      FROM items
+      WHERE user_id = ${userId}
+      AND id =
+    `;
 
+    db
+      .query(queryString, query)
 
   });
 
