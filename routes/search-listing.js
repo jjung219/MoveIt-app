@@ -7,21 +7,53 @@ module.exports = (db) => {
     console.log("Searching listings...");
 
     const search = req.body;
-    const searchedItem = req.body['item-name'];
+    const searchedItem = `${req.body['item-name']}`;
     const searchedMinPrice = Number(req.body['min-price']);
     const searchedMaxPrice = Number(req.body['max-price']);
     console.log(search);
-    const queryParams = [ searchedItem, searchedMinPrice, searchedMaxPrice];
+    const queryParams = [];
 
-
-    const queryString = `
+    let queryString = `
       SELECT *
       FROM items
-      WHERE name = $1
-      AND price >= $2
-      AND price <= $3
     `;
 
+    // if name is present
+    if (searchedItem) {
+      queryParams.push(`%${searchedItem}%`);
+      queryString += `WHERE name LIKE LOWER($${queryParams.length})`;
+      if (searchedMinPrice) {
+        // if name and min-price present
+        queryParams.push(searchedMinPrice);
+        queryString += `AND price >= $${queryParams.length}`;
+        if (searchedMaxPrice) {
+          // if all present
+          queryParams.push(searchedMaxPrice);
+          queryString += `AND price <= $${queryParams.length}`;
+        }
+      }
+      if (searchedMaxPrice) {
+        // if name and max-price present
+        queryParams.push(searchedMaxPrice);
+        queryString += `AND price <= $${queryParams.length}`;
+      }
+    } else if (searchedMinPrice) {
+      // if name not present, min-price is present
+      queryParams.push(searchedMinPrice);
+      queryString += `WHERE price >= $${queryParams.length}`;
+      if (searchedMaxPrice) {
+        // if name not present, min-price and max-price present
+        queryParams.push(searchedMaxPrice);
+        queryString += `AND price <= $${queryParams.length}`;
+      }
+    } else if (searchedMaxPrice) {
+      // if name and min-price not present, max-price present
+      queryParams.push(searchedMaxPrice);
+      queryString += `WHERE price <= $${queryParams.length}`;
+    }
+
+    console.log('query:', queryString);
+    console.log('params: ',queryParams)
     db
     .query(queryString, queryParams)
     .then(result => {
@@ -32,6 +64,7 @@ module.exports = (db) => {
       }
       return res.render('index-search', templateVars);
     })
+    .catch(err => console.log('Error: ', err.stack));
 
   });
   return router;
