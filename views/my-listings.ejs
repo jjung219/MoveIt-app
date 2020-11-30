@@ -54,7 +54,9 @@
             <%} else {%>
               <a href=""><i class="far fa-heart fa-2x"></i></a>
             <%}%>
-            <button class="btn btn-secondary">Remove</button>
+            <form action="/api/listings/<%= item %>/delete" method="POST">
+              <button id="remove-btn" class="btn btn-secondary" type="submit">Remove</button>
+            </form>
           </div>
         </div>
       </div>

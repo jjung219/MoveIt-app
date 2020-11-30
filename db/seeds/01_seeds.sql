@@ -11,5 +11,12 @@ VALUES (4, 'table', 'table description', 'https://images.unsplash.com/photo-1499
 (5, 'book', 'book description', 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Ym9va3xlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=500&q=60', 20, 'Used', FALSE, FALSE);
 
 
+
+-- INSERT INTO items (user_id, name, description, photo_url, price, condition, favorite, active)
+-- VALUES (7, 'iPhone', 'iPhone description', 'https://images.unsplash.com/photo-1509741102003-ca64bfe5f069?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTF8fGlwaG9uZXxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60', 100, 'Used', FALSE, TRUE),
+-- (7, 'laptop', 'laptop description', 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8bGFwdG9wfGVufDB8fDB8&auto=format&fit=crop&w=400&q=60', 200, 'Used', FALSE, TRUE)
+
+
+
 INSERT INTO item_reviews (user_id, item_id, review)
 VALUES (6, 8, 'Book was great!');

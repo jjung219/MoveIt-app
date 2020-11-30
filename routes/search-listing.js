@@ -8,8 +8,8 @@ module.exports = (db) => {
 
     const search = req.body;
     const searchedItem = `${req.body['item-name']}`;
-    const searchedMinPrice = Number(req.body['min-price']);
-    const searchedMaxPrice = Number(req.body['max-price']);
+    const searchedMinPrice = req.body['min-price'];
+    const searchedMaxPrice = req.body['max-price'];
     console.log(search);
     const queryParams = [];
 
