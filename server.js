@@ -10,13 +10,8 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 var cookieSession = require('cookie-session');
 const morgan     = require('morgan');
-<<<<<<< HEAD
 var cookieSession = require('cookie-session')
 const { Pool, Client } = require('pg')
-=======
-
-
->>>>>>> 78d14de5c7fb27397a754126520ed7664ea9239e
 // PG database client/connection setup
 // const { Pool } = require('pg');
 // const dbParams = require('./lib/db.js');
@@ -88,18 +83,6 @@ app.get("/", (req, res) => {
   })
   .catch(e => console.log(e.stack))
 });
-
-<<<<<<< HEAD
-// app.get("/favourites", (req, res) => {
-//   res.render("favourites");
-// })
-=======
-
-app.get("/favourites", (req, res) => {
-  res.render("favourites");
-});
-
->>>>>>> 78d14de5c7fb27397a754126520ed7664ea9239e
 
 
 app.listen(PORT, () => {
