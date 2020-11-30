@@ -10,12 +10,20 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 var cookieSession = require('cookie-session')
-
+const { Pool, Client } = require('pg')
 // PG database client/connection setup
-const { Pool } = require('pg');
-const dbParams = require('./lib/db.js');
-const db = new Pool(dbParams);
-db.connect();
+// const { Pool } = require('pg');
+// const dbParams = require('./lib/db.js');
+// const db = new Pool(dbParams);
+// db.connect();
+
+const db = new Pool({
+  user: 'labber',
+  host: 'localhost',
+  database: 'midterm',
+  password: 'labber',
+})
+db.connect().then(() => console.log('db conected'));
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -54,8 +62,24 @@ app.use("/api/widgets", widgetsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  let templateVar = {};
+  let items;
+  // res.render('index')
+  db
+  .query('SELECT * FROM items')
+  .then(result => {
+    items = (result.rows);
+    templateVar.itemsArr = items;
+    res.render('index', templateVar)
+    // console.log(templateVar)
+  })
+  .catch(e => console.log(e.stack))
 });
+
+// app.get("/favourites", (req, res) => {
+//   res.render("favourites");
+// })
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

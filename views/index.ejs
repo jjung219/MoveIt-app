@@ -79,23 +79,31 @@
           </a>
         </div> -->
 
+        <%  for(let item in itemsArr) { console.log(itemsArr[item]); %>
         <div class="row">
-
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">Item One</a>
-                </h4>
-                <h5>$24.99</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
-              </div>
-              <div class="card-footer">
-                <small>heart favorits</small>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="<%= itemsArr[item].photo_url %>"> </a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="#"><%= itemsArr[item].name %></a>
+                  </h4>
+                  <h5>$<%= itemsArr[item].price %></h5>
+                  <p class="card-text"><%= itemsArr[item].description %></p>
+                </div>
+                <span> <button>message</button></span>
+                <div class="card-footer">
+                  <small><button>favorit</button> </small>
+                  <small>condition = <%= itemsArr[item].condition %></small>
+                  <% if (itemsArr[item].active) { %>
+                  <small>For Sale</small>
+                  <% } else { %>
+                  <small>sold</small>
+                  <% } %>
+                </div>
               </div>
             </div>
-          </div>
+            <% } %>
 
   /.container
 
