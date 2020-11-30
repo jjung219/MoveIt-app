@@ -60,6 +60,17 @@ app.use("/api/", searchListingRoutes(db));
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+app.get("/new", (req, res) => {
+  res.render("new");
+});
+app.get("/favourites", (req, res) => {
+  res.render("favourites");
+});
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
