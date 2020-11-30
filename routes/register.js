@@ -6,17 +6,43 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
     res.render("register");
   });
-  router.post("/",(req,res)=>{
-    const {userName,email,password} = req.body;
-    console.log(userName,email,password);
-  })
+
+  const getUserwithEmail = function (email) {
+    return db.query(`SELECT * FROM users WHERE email=$1`, [email])
+      .then(res => res.rows[0].email)
+      .catch(err => console.log(err));
+  }
+  const addNewUser = function (name, email, password) {
+    return db.query(`INSERT INTO users(name,email,password) VALUES($1,$2,$3) RETURNING *`, [name, email, password])
+      .then(user => user.rows[0].id)
+      .catch(err => console.log(err));
+  }
+
+  router.post("/", (req, res) => {
+    const userName = req.body.userName;
+    const userEmail = req.body.userEmail;
+    const userPassword = req.body.userPassword;
+    // console.log(userName,userEmail,userpassword);
+    getUserwithEmail(userEmail)
+      .then(user => {
+        if (!user) {
+          addNewUser(userName, userEmail, userPassword)
+            .then(userId => {
+              req.session['user_id'] = userId;
+              res.redirect("/")
+            });
+        } else {
+          res.send("user already exist")
+        }
+      });
+  });
   return router;
 };
 
