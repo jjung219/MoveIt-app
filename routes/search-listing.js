@@ -7,29 +7,32 @@ module.exports = (db) => {
     console.log("Searching listings...");
 
     const search = req.body;
+    const searchedItem = req.body['item-name'];
+    const searchedMinPrice = Number(req.body['min-price']);
+    const searchedMaxPrice = Number(req.body['max-price']);
     console.log(search);
+    const queryParams = [ searchedItem, searchedMinPrice, searchedMaxPrice];
+
 
     const queryString = `
       SELECT *
       FROM items
+      WHERE name = $1
+      AND price >= $2
+      AND price <= $3
     `;
 
     db
-    .query(queryString)
+    .query(queryString, queryParams)
     .then(result => {
       const items = result.rows;
       const templateVars = { items: {} };
       for (item of items) {
         templateVars.items[item.id] = item;
       }
-      // console.log(templateVars);
-      console.log(templateVars.items[5].description)
-      return res.render('index', templateVars);
+      return res.render('index-search', templateVars);
     })
 
-    // console.log(templateVars)
-
-    // res.render('index', templateVars);
   });
   return router;
 };
