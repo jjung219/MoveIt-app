@@ -84,8 +84,11 @@
                   <p class="card-text">Condition: <%= items[item].condition %></p>
                 </div>
                 <div class="card-footer">
-                  <span style="color: red;">SOLD</span>
-                  <span>Available</span>
+                  <% if (items[item].active) {%>
+                    <span>Available</span>
+                  <%} else {%>
+                    <span style="color: red;">SOLD</span>
+                  <%}%>
                   <i class="fas fa-heart fa-2x"></i>
                   <i class="far fa-heart fa-2x"></i>
                   <button class="btn btn-primary">Message</button>
