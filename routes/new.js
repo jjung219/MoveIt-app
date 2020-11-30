@@ -12,14 +12,18 @@ module.exports = (db) => {
       .catch(err => console.log(err));
   }
   router.post("/", (req, res) => {
-    console.log(req.session)
+
     const userId = req.session.user_id;
-    console.log(userId)
-    addListing({ ...req.body, user_id: userId })
+    if(userId){
+    // console.log(req.session);
+    addListing({...req.body, user_id: userId })
       .then(listing => {
         res.send(listing)
       })
       .catch(err => console.log(err));
+    }else{
+      res.redirect("/register");
+    }
   })
   return router;
 }

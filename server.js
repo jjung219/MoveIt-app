@@ -49,12 +49,14 @@ app.use(express.static("public"));
 const RegisterRoutes = require("./routes/register");
 const widgetsRoutes = require("./routes/widgets");
 const newRoutes = require("./routes/new");
+const loginRoutes = require("./routes/login");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/register", RegisterRoutes(db));
 app.use("/widgets", widgetsRoutes(db));
 app.use("/new",newRoutes(db));
+app.use("/login",loginRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 

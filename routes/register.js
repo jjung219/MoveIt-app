@@ -36,6 +36,7 @@ module.exports = (db) => {
           addNewUser(userName, userEmail, userPassword)
             .then(userId => {
               req.session['user_id'] = userId;
+              console.log(req.session);
               res.redirect("/")
             });
         } else {
