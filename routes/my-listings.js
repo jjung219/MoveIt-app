@@ -25,3 +25,6 @@ module.exports = (db) => {
   });
   return router;
 };
+
+//Only render items of the user that is logged in
+//Remove button needs to only delete items if the user id matches the user_id of the items

@@ -23,25 +23,23 @@
     <%- include('partials/_header') %>
   </header>
   <body>
-    <form>
+    <form action="/new" method="POST">
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="inputName4">name</label>
-          <input type="text" class="form-control" id="inputname4" placeholder="Name">
+
+          <input type="text" class="form-control" id="inputname4" placeholder="Name" name="name">
         </div>
         <div class="form-group col-md-6">
-          <label for="inputPrice">Price</label>
-          <input type="text" class="form-control" id="Price4" placeholder="Price">
+          <input type="text" class="form-control" id="Price4" placeholder="Price" name="price">
         </div>
       </div>
       <div class="form-group">
-        <label for="inputImage_url">Image_url</label>
-        <input type="text" class="form-control" id="inputImage" placeholder="Image_url">
+        <input type="text" class="form-control" id="inputImage" placeholder="Image_url" name="photo_url">
       </div>
 
         <div class="form-group col-md-4">
           <label for="inputcondition">Condition</label>
-          <select id="inputcondition" class="form-control">
+          <select id="inputcondition" class="form-control" name="condition">
             <option selected>Choose...</option>
             <option>Used</option>
             <option>New</option>
@@ -49,7 +47,7 @@
         </div>
         <div class="form-group">
           <label for="inputDescription">Description</label>
-          <textarea placeholder="Description" name="description" cols="30" rows="10"></textarea>
+          <textarea placeholder="Description" name="description" cols="30" rows="10" name="description"></textarea>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Create</button>

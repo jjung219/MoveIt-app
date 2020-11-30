@@ -8,8 +8,9 @@ const express    = require("express");
 const bodyParser = require("body-parser");
 const sass       = require("node-sass-middleware");
 const app        = express();
+var cookieSession = require('cookie-session');
 const morgan     = require('morgan');
-var cookieSession = require('cookie-session')
+
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -30,17 +31,22 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(bodyParser.json());
-app.use(express.static("public"));
 
 app.use(cookieSession({
   name: 'session',
   keys: ['key1', 'key2']
 }))
 
+
+
+app.use(bodyParser.json());
+app.use(express.static("public"));
+
+
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const homeRoutes = require("./routes/home");
+const RegisterRoutes = require("./routes/register");
 const widgetsRoutes = require("./routes/widgets");
 const searchRoutes = require("./routes/search");
 const searchListingRoutes = require("./routes/search-listing");
@@ -48,11 +54,18 @@ const myListingsRoutes = require("./routes/my-listings");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/home", homeRoutes(db));
+app.use("/api/register", RegisterRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/search", searchRoutes(db));
 app.use("/api/", searchListingRoutes(db));
 app.use("/api/listings", myListingsRoutes(db));
+const newRoutes = require("./routes/new");
+
+// Mount all resource routes
+// Note: Feel free to replace the example routes below with your own
+app.use("/register", RegisterRoutes(db));
+app.use("/widgets", widgetsRoutes(db));
+app.use("/new",newRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -62,12 +75,8 @@ app.use("/api/listings", myListingsRoutes(db));
 app.get("/", (req, res) => {
   res.render("index");
 });
-app.get("/register", (req, res) => {
-  res.render("register");
-});
-app.get("/new", (req, res) => {
-  res.render("new");
-});
+
+
 app.get("/favourites", (req, res) => {
   res.render("favourites");
 });
