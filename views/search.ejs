@@ -22,31 +22,46 @@
 
   <body>
     <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">MoveIt</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Search</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Login</a>
-          </li>
-        </ul>
+    <%- include('partials/_header') %>
+  <!-- Search -->
+  <div>
+    <h1>Need to be deleted later</h1>
+    <h1>Search</h1>
+    <form method="POST" action="/api/">
+      <div class="form-group">
+        <label for="item-name">Name</label>
+        <input id ="item-name" type="text" class="form-control" name="item-name">
       </div>
+      <div class="input-group mb-3">
+        <label for="minimum-price">Minimum-price</label>
+        <input id="minimum-price" type="number" class="form-control" name="min-price" aria-label="Dollar amount (with dot and two decimal places)">
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+          <span class="input-group-text">0.00</span>
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="maximum-price">Maximum-price</label>
+        <input id="maximum-price" type="number" class="form-control" name="max-price" aria-label="Dollar amount (with dot and two decimal places)">
+        <div class="input-group-append">
+          <span class="input-group-text">$</span>
+          <span class="input-group-text">0.00</span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
     </div>
-  </nav>
+  <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

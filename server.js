@@ -56,7 +56,20 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const RegisterRoutes = require("./routes/register");
 const widgetsRoutes = require("./routes/widgets");
+const searchRoutes = require("./routes/search");
+const searchListingRoutes = require("./routes/search-listing");
+const myListingsRoutes = require("./routes/my-listings");
 const newRoutes = require("./routes/new");
+const removeListingRoutes = require("./routes/my-listings-remove");
+
+// Mount all resource routes
+// Note: Feel free to replace the example routes below with your own
+// app.use("/api/register", RegisterRoutes(db));
+// app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/search", searchRoutes(db));
+app.use("/api/", searchListingRoutes(db));
+app.use("/api/listings", myListingsRoutes(db));
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -64,6 +77,7 @@ app.use("/register", RegisterRoutes(db));
 app.use("/widgets", widgetsRoutes(db));
 app.use("/new",newRoutes(db));
 // Note: mount other resources here, using the same pattern above
+app.use("/api/listings/", removeListingRoutes(db));
 
 
 // Home page
@@ -87,4 +101,15 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
+});
+
+
+app.get("/listings", (req, res) => {
+
+  res.render("listings");
+});
+
+app.get("/login", (req, res) => {
+
+  res.render("login");
 });
