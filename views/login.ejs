@@ -17,22 +17,22 @@
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
-<header>
-  <%- include('partials/_header') %>
-</header>
-<body>
-  <form action="/login" method="POST">
-    <div class="form-group">
-      <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
-      <input type="text" class="form-control" id="exampleInputName" placeholder="Your Name" name="name">
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
-    </div>
-    <div class="form-group">
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-  </form>
-</body>
+  </head>
+  <body>
+    <header>
+      <%- include('partials/_header') %>
+    </header>
+    <form action="/login" method="POST">
+      <div class="form-group">
+        <h1 class="h3 mb-3 font-weight-normal">Please Login</h1>
+        <input type="text" class="form-control" id="exampleInputName" placeholder="Your Name" name="name">
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </body>
 </html>
 

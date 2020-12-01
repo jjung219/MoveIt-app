@@ -3,7 +3,10 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.render("login");
+    const userId = req.session['user_id'];
+    const templateVars = { user: userId };
+
+    res.render("login", templateVars);
   });
   const getUserwithEmail = function (email) {
     return db.query(`SELECT * FROM users WHERE email=$1`, [email])
@@ -28,7 +31,7 @@ if(!user){
   getUserwithEmail(email)
   .then(user=>{
     req.session['user_id'] = user.id;
-    res.redirect("/new")
+    res.redirect("/")
   })
 }
   });

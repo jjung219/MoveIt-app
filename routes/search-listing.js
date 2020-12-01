@@ -59,7 +59,7 @@ module.exports = (db) => {
     .then(result => {
       const items = result.rows;
       console.log(items);
-      const templateVars = { items: {} };
+      const templateVars = { items: {} , user: req.session['user_id'] };
       for (item of items) {
         templateVars.items[item.id] = item;
       }
