@@ -12,6 +12,7 @@ module.exports = (db) => {
       WHERE user_id = $1;
     `;
     const queryParams = [userId];
+    console.log(req.session)
 
     if (!userId) {
       return res.redirect('/login');
