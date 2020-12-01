@@ -1,7 +1,11 @@
 // See: https://sass-lang.com/
 
 body {
-  background-color: #EEE;
+  background-color: #eee;
+
+  .container {
+    margin-top: 5rem;
+  }
 
   h1 {
     color: #244751;

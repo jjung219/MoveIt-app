@@ -11,7 +11,7 @@ module.exports = (db) => {
       .then(result => {
         const userInfo = result.rows[0];
         templateVars = {user: userInfo}
-        return res.render("search", templateVars);
+        return res.render("new", templateVars);
       })
       .catch(err => console.log('Error: ', err.stack))
   });
