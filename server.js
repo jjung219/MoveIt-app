@@ -61,6 +61,7 @@ const searchListingRoutes = require("./routes/search-listing");
 const myListingsRoutes = require("./routes/my-listings");
 const newRoutes = require("./routes/new");
 const removeListingRoutes = require("./routes/my-listings-remove");
+const favouritesRoutes = require("./routes/favourites");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -74,6 +75,7 @@ app.use("/api/listings", myListingsRoutes(db));
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/register", RegisterRoutes(db));
+app.use("/favourites", favouritesRoutes(db));
 app.use("/widgets", widgetsRoutes(db));
 app.use("/new",newRoutes(db));
 // Note: mount other resources here, using the same pattern above
