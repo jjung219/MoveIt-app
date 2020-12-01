@@ -8,9 +8,9 @@ module.exports = (db) => {
   });
 
   const addListing = function (listing) {
-    console.log(`listingobject `)
-    console.log(listing)
-    return db.query(`INSERT INTO items(name,description,photo_url,price,condition,user_id) VALUES($1,$2,$3,$4,$5,$6) RETURNING *`,[listing.name, listing.description, listing.photo_url, listing.price, listing.condition, listing.user_id])
+    // console.log(`listingobject `)
+    // console.log(listing)
+    return db.query(`INSERT INTO items(name,description,photo_url,price,condition,user_id) VALUES($1,$2,$3,$4,$5,$6) RETURNING *`,[listing.name, listing.description, listing.photo_url, listing.price, listing.condition,listing.user_id])
       .then(res => res.rows[0])
       .catch(err => console.log(err));
 
@@ -19,11 +19,11 @@ module.exports = (db) => {
   router.post("/", (req, res) => {
     const userId = req.session.user_id;
      if(userId){
-     console.log(req.session);
+    //  console.log(req.session);
     addListing({...req.body, user_id: userId })
       .then(listing => {
-        res.send(listing);
-        res,redirect("/myListings")
+
+        res.redirect("/listings")
       })
       .catch(err => console.log(err));
     }else{

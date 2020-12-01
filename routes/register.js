@@ -16,7 +16,7 @@ module.exports = (db) => {
 
   const getUserwithEmail = function (email) {
     return db.query(`SELECT * FROM users WHERE email=$1`, [email])
-      .then(res => res.rows[0].email)
+      .then(res => res.rows[0])
       .catch(err => console.log(err));
   }
   const addNewUser = function (name, email, password) {
@@ -36,7 +36,7 @@ module.exports = (db) => {
           addNewUser(userName, userEmail, userPassword)
             .then(userId => {
               console.log(`test:${userId}`);
-              req.session['user_id'] = userId;
+              req.session.user_id = userId;
               console.log(req.session);
               res.redirect("/")
             });

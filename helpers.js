@@ -2,7 +2,7 @@
 module.exports = (db) => {
   const getUserwithEmail = function (email) {
   return db.query(`SELECT * FROM users WHERE email=$1`, [email])
-    .then(res => res.rows[0].email)
+    .then(res => res.rows[0])
     .catch(err => console.log(err));
 }
 
