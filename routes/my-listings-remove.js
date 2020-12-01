@@ -6,12 +6,17 @@ module.exports = (db) => {
     const userId = req.session.user_id;
     const itemId = req.params.id;
 
+
     const queryParams = [userId, itemId]
     const queryString = `
       DELETE FROM items
       WHERE user_id = $1
       AND id = $2
     `;
+
+    if (!userId) {
+      return res.redirect('/login');
+    }
 
     db
       .query(queryString, queryParams)
@@ -24,14 +29,3 @@ module.exports = (db) => {
   return router;
 };
 
-// app.post("/urls/:shortURL/delete", (req, res) => {
-//   const userId = req.session["user_id"];
-//   const shortURL = req.params.shortURL;
-
-//   if (urlDatabase[shortURL].userID === userId) {
-//     delete urlDatabase[shortURL];
-//     res.redirect("/urls");
-//   } else {
-//     res.redirect("/login");
-//   }
-// });

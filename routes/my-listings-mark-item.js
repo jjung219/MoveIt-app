@@ -14,6 +14,10 @@ module.exports = (db) => {
       AND id = $2
     `;
 
+    if (!userId) {
+      return res.redirect('/login');
+    }
+
     db
       .query(queryString, queryParams)
       .then((result)=> {
