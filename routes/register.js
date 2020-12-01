@@ -35,6 +35,7 @@ module.exports = (db) => {
         if (!user) {
           addNewUser(userName, userEmail, userPassword)
             .then(userId => {
+              console.log(`test:${userId}`);
               req.session['user_id'] = userId;
               console.log(req.session);
               res.redirect("/")
