@@ -3,15 +3,9 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-<<<<<<< HEAD
-
-    const userId = req.session.user_id;
-    let queryParams = [];
-=======
     const userId = req.session['user_id'];
     let templateVars = { user: userId, items: {} };
 
->>>>>>> e70540ffa823a777eda17018a347ca4ba0ef5c61
     const queryString = `
       SELECT *
       FROM items
