@@ -22,54 +22,56 @@
   </head>
 
   <body>
-    <!-- Navigation -->
-    <%- include('partials/_header') %>
+    <header>
+      <!-- Navigation -->
+      <%- include('partials/_header') %>
+    </header>
 
   <!-- My Listings -->
-  <div>
-    <h1>Need to be deleted later</h1>
-    <h1>My Listings</h1>
-  </div>
-  <div class="row">
-    <% for (let item in items) {%>
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card h-100">
-          <a href="#"><img class="card-img-top" src="<%= items[item].photo_url %>" alt=""></a>
-          <div class="card-body">
-            <h4 class="card-title">
-              <a href="#"><%= items[item].name %></a>
-            </h4>
-            <h5>$<%= items[item].price %></h5>
-            <p class="card-text"><%= items[item].description %></p>
-            <p class="card-text">Condition: <%= items[item].condition %></p>
-          </div>
-          <div class="card-footer">
-            <% if (items[item].active) {%>
-              <span>Available</span>
-            <%} else {%>
-              <span style="color: red;">SOLD</span>
-            <%}%>
-            <% if (items[item].favorite) {%>
-              <i class="fas fa-heart fa-2x"></i>
-            <%} else {%>
-              <a href=""><i class="far fa-heart fa-2x"></i></a>
-            <%}%>
-            <form action="/listings/<%= item %>/delete" method="POST">
-              <button id="remove-btn" class="btn btn-secondary" type="submit">Remove</button>
-            </form>
-            <% if (items[item].active) {%>
-              <form action="/listings/<%= item %>/mark-item" method="POST">
-                <button id="mark-sold-btn" class="btn btn-primary" type="submit">Mark Sold</button>
+    <div>
+      <h1>Need to be deleted later</h1>
+      <h1>My Listings</h1>
+    </div>
+    <div class="row">
+      <% for (let item in items) {%>
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="<%= items[item].photo_url %>" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#"><%= items[item].name %></a>
+              </h4>
+              <h5>$<%= items[item].price %></h5>
+              <p class="card-text"><%= items[item].description %></p>
+              <p class="card-text">Condition: <%= items[item].condition %></p>
+            </div>
+            <div class="card-footer">
+              <% if (items[item].active) {%>
+                <span>Available</span>
+              <%} else {%>
+                <span style="color: red;">SOLD</span>
+              <%}%>
+              <% if (items[item].favorite) {%>
+                <i class="fas fa-heart fa-2x"></i>
+              <%} else {%>
+                <a href=""><i class="far fa-heart fa-2x"></i></a>
+              <%}%>
+              <form action="/listings/<%= item %>/delete" method="POST">
+                <button id="remove-btn" class="btn btn-secondary" type="submit">Remove</button>
               </form>
-            <% } else {%>
-              <form action="/listings/<%= item %>/mark-item" method="POST">
-                <button id="mark-available-btn" class="btn btn-primary" type="submit">Mark Available</button>
-              </form>
-            <% } %>
+              <% if (items[item].active) {%>
+                <form action="/listings/<%= item %>/mark-item" method="POST">
+                  <button id="mark-sold-btn" class="btn btn-primary" type="submit">Mark Sold</button>
+                </form>
+              <% } else {%>
+                <form action="/listings/<%= item %>/mark-item" method="POST">
+                  <button id="mark-available-btn" class="btn btn-primary" type="submit">Mark Available</button>
+                </form>
+              <% } %>
+            </div>
           </div>
         </div>
-      </div>
-    <%}%>
+      <%}%>
 
     <!-- <div class="col-lg-4 col-md-6 mb-4">
       <div class="card h-100">
