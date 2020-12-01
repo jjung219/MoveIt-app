@@ -3,21 +3,24 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-
     const userId = req.session['user_id'];
-    let queryParams = [];
+    let templateVars = { user: userId, items: {} };
+
     const queryString = `
       SELECT *
       FROM items
       WHERE user_id = $1;
     `;
+    const queryParams = [userId];
 
-    queryParams = [userId];
+    if (!userId) {
+      return res.redirect('/login');
+    }
+
     db
       .query(queryString, queryParams)
       .then(result => {
         const items = result.rows;
-        const templateVars = { items: {} };
         for (item of items) {
           templateVars.items[item.id] = item;
         }
