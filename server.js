@@ -61,16 +61,20 @@ const searchListingRoutes = require("./routes/search-listing");
 const myListingsRoutes = require("./routes/my-listings");
 const newRoutes = require("./routes/new");
 const removeListingRoutes = require("./routes/my-listings-remove");
+<<<<<<< HEAD
 const favouritesRoutes = require("./routes/favourites");
+=======
+const markItemRoutes = require("./routes/my-listings-mark-item");
+const logoutRoutes = require("./routes/logout");
+>>>>>>> 59421aa02d1e2d5a0d888e912a98e1c7038796ed
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-// app.use("/api/register", RegisterRoutes(db));
-// app.use("/api/widgets", widgetsRoutes(db));
-app.use("/api/search", searchRoutes(db));
-app.use("/api/", searchListingRoutes(db));
-app.use("/api/listings", myListingsRoutes(db));
+app.use("/search", searchRoutes(db));
+app.use("/", searchListingRoutes(db));
+app.use("/listings", myListingsRoutes(db));
 
+const loginRoutes = require("./routes/login");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -78,14 +82,18 @@ app.use("/register", RegisterRoutes(db));
 app.use("/favourites", favouritesRoutes(db));
 app.use("/widgets", widgetsRoutes(db));
 app.use("/new",newRoutes(db));
+app.use("/login",loginRoutes(db));
 // Note: mount other resources here, using the same pattern above
-app.use("/api/listings/", removeListingRoutes(db));
+app.use("/listings", removeListingRoutes(db));
+app.use("/listings", markItemRoutes(db));
+app.use("/logout", logoutRoutes(db));
 
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
+<<<<<<< HEAD
   let templateVar = {};
   let items;
   // res.render('index')
@@ -98,6 +106,9 @@ app.get("/", (req, res) => {
     // console.log(templateVar)
   })
   .catch(e => console.log(e.stack))
+=======
+  res.render("index");
+>>>>>>> 59421aa02d1e2d5a0d888e912a98e1c7038796ed
 });
 
 
@@ -106,12 +117,3 @@ app.listen(PORT, () => {
 });
 
 
-app.get("/listings", (req, res) => {
-
-  res.render("listings");
-});
-
-app.get("/login", (req, res) => {
-
-  res.render("login");
-});

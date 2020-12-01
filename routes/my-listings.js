@@ -3,27 +3,34 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-
     const userId = req.session['user_id'];
-    let queryParams = [];
-    const queryString = `
-      SELECT *
-      FROM items
-      WHERE user_id = $1;
-    `;
+    let templateVars = { user: {}, items: {} };
 
-    queryParams = [userId];
+
+    const queryString = `
+      SELECT users.name as user, items.*
+      FROM items
+      FULL JOIN users ON items.user_id = users.id
+      WHERE items.user_id = $1;
+    `;
+    const queryParams = [userId];
+    console.log(req.session)
+
+    if (!userId) {
+      return res.redirect('/login');
+    }
+
     db
-    .query(queryString, queryParams)
-    .then(result => {
-      const items = result.rows;
-      const templateVars = { items: {} };
-      for (item of items) {
-        templateVars.items[item.id] = item;
-      }
-      return res.render('my-listings', templateVars);
-    })
-    .catch(err => console.log('Error: ', err.stack));
+      .query(queryString, queryParams)
+      .then(result => {
+        const items = result.rows;
+        for (item of items) {
+          templateVars.items[item.id] = item;
+        }
+        templateVars.user['name'] = items[0].user;
+        return res.render('my-listings', templateVars);
+      })
+      .catch(err => console.log('Error: ', err.stack));
 
   });
 
@@ -36,3 +43,16 @@ module.exports = (db) => {
 
 // Edge Cases:
 // if userId is not present
+
+// const userId = req.session['user_id'];
+// const queryString = `SELECT * FROM users WHERE id = $1`
+
+// db
+//   .query (queryString, [userId])
+//   .then(result => {
+//     const userInfo = result.rows[0];
+//     templateVars = {user: userInfo}
+//     console.log(userInfo)
+//     return res.render("search", templateVars);
+//   })
+//   .catch(err => console.log('Error: ', err.stack))

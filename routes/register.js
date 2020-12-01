@@ -11,12 +11,19 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.render("register");
+    const userId = req.session['user_id'];
+    const templateVars = { user: userId };
+
+    if (userId) {
+      return res.redirect("/");
+    }
+
+    res.render("register", templateVars);
   });
 
   const getUserwithEmail = function (email) {
     return db.query(`SELECT * FROM users WHERE email=$1`, [email])
-      .then(res => res.rows[0].email)
+      .then(res => res.rows[0])
       .catch(err => console.log(err));
   }
   const addNewUser = function (name, email, password) {
@@ -35,7 +42,9 @@ module.exports = (db) => {
         if (!user) {
           addNewUser(userName, userEmail, userPassword)
             .then(userId => {
-              req.session['user_id'] = userId;
+              console.log(`test:${userId}`);
+              req.session.user_id = userId;
+              console.log(req.session);
               res.redirect("/")
             });
         } else {

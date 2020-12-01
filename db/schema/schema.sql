@@ -16,7 +16,7 @@ CREATE TABLE items (
   name VARCHAR(255) NOT NULL,
   description TEXT,
   photo_url VARCHAR(255),
-  price INTEGER  NOT NULL DEFAULT 0,
+  price VARCHAR  NOT NULL DEFAULT 0,
   condition VARCHAR (500) NOT NULL,
   active BOOLEAN NOT NULL DEFAULT TRUE
 );
@@ -26,5 +26,4 @@ CREATE TABLE favorites (
   item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
-
 

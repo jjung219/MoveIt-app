@@ -3,23 +3,42 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    res.render("new");
+    const userId = req.session['user_id'];
+    const queryString = `SELECT * FROM users WHERE id = $1`
+
+    db
+      .query (queryString, [userId])
+      .then(result => {
+        const userInfo = result.rows[0];
+        templateVars = {user: userInfo}
+        return res.render("search", templateVars);
+      })
+      .catch(err => console.log('Error: ', err.stack))
   });
 
-  router.post("/", (req, res) => {
-    const addListing = function (listing) {
-      const userId = req.session.user_id;
-      return db.query(`INSERT INTO items(user_id, name,description,photo_url,price,condition) VALUES($1,$2,$3,$4,$5,$6) RETURNING *`, [ userId, listing.name, listing.description, listing.photo_url, listing.price, listing.condition])
-        .then(res => res.rows[0])
-        .catch(err => console.log(err));
-    }
+  const addListing = function (listing) {
+    // console.log(`listingobject `)
+    // console.log(listing)
+    return db.query(`INSERT INTO items(name,description,photo_url,price,condition,user_id) VALUES($1,$2,$3,$4,$5,$6) RETURNING *`,[listing.name, listing.description, listing.photo_url, listing.price, listing.condition,listing.user_id])
+      .then(res => res.rows[0])
+      .catch(err => console.log(err));
 
-    addListing(req.body)
-      .then(()=> {
-        res.redirect("/api/listings");
+  }
+
+  router.post("/", (req, res) => {
+    const userId = req.session.user_id;
+     if(userId){
+    //  console.log(req.session);
+    addListing({...req.body, user_id: userId })
+      .then(listing => {
+
+        res.redirect("/listings")
       })
       .catch(err => console.log(err));
-  })
+    }else{
+      res.redirect("/login");
+    }
+  });
   return router;
 }
 
