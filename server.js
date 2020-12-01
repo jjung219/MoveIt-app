@@ -57,18 +57,18 @@ const markItemRoutes = require("./routes/my-listings-mark-item");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-// app.use("/api/register", RegisterRoutes(db));
-// app.use("/api/widgets", widgetsRoutes(db));
 app.use("/search", searchRoutes(db));
 app.use("/", searchListingRoutes(db));
 app.use("/listings", myListingsRoutes(db));
 
+const loginRoutes = require("./routes/login");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/register", RegisterRoutes(db));
 app.use("/widgets", widgetsRoutes(db));
 app.use("/new",newRoutes(db));
+app.use("/login",loginRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/listings", removeListingRoutes(db));
 app.use("/listings", markItemRoutes(db));
@@ -80,12 +80,6 @@ app.use("/listings", markItemRoutes(db));
 app.get("/", (req, res) => {
   res.render("index");
 });
-
-
-app.get("/favourites", (req, res) => {
-  res.render("favourites");
-});
-
 
 
 app.listen(PORT, () => {

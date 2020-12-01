@@ -3,23 +3,33 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    console.log(req.session);
     res.render("new");
   });
 
-  router.post("/", (req, res) => {
-    const addListing = function (listing) {
-      const userId = req.session.user_id;
-      return db.query(`INSERT INTO items(user_id, name,description,photo_url,price,condition) VALUES($1,$2,$3,$4,$5,$6) RETURNING *`, [ userId, listing.name, listing.description, listing.photo_url, listing.price, listing.condition])
-        .then(res => res.rows[0])
-        .catch(err => console.log(err));
-    }
+  const addListing = function (listing) {
+    console.log(`listingobject `)
+    console.log(listing)
+    return db.query(`INSERT INTO items(name,description,photo_url,price,condition,user_id) VALUES($1,$2,$3,$4,$5,$6) RETURNING *`,[listing.name, listing.description, listing.photo_url, listing.price, listing.condition, listing.user_id])
+      .then(res => res.rows[0])
+      .catch(err => console.log(err));
 
-    addListing(req.body)
-      .then(()=> {
-        res.redirect("/api/listings");
+  }
+
+  router.post("/", (req, res) => {
+    const userId = req.session.user_id;
+     if(userId){
+     console.log(req.session);
+    addListing({...req.body, user_id: userId })
+      .then(listing => {
+        res.send(listing);
+        res,redirect("/myListings")
       })
       .catch(err => console.log(err));
-  })
+    }else{
+      res.redirect("/login");
+    }
+  });
   return router;
 }
 
