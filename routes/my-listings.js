@@ -27,7 +27,7 @@ module.exports = (db) => {
         for (item of items) {
           templateVars.items[item.id] = item;
         }
-        templateVars.user = items[0].user;
+        templateVars.user['name'] = items[0].user;
         return res.render('my-listings', templateVars);
       })
       .catch(err => console.log('Error: ', err.stack));
