@@ -71,21 +71,6 @@ VALUES
   );
 
 INSERT INTO
-  item_reviews (user_id, item_id, review)
-VALUES
-(1, 1, 'Good');
-
-INSERT INTO
-  item_reviews (user_id, item_id, review)
-VALUES
-(1, 2, 'VGood');
-
-INSERT INTO
-  item_reviews (user_id, item_id, review)
-VALUES
-(2, 3, 'bad');
-
-INSERT INTO
   favorites(item_id, user_id)
 VALUES
 (1, 2);

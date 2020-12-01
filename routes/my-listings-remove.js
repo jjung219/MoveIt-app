@@ -3,7 +3,7 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.post ("/:id/delete", (req, res) => {
-    const userId = req.session['user_id'];
+    const userId = req.session.user_id;
     const itemId = req.params.id;
 
 
