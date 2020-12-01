@@ -6,16 +6,19 @@ module.exports = (db) => {
     const userId = req.session['user_id'];
     const itemId = req.params.id;
 
+    const queryParams = [userId, itemId]
     const queryString = `
-      DELETE *
-      FROM items
-      WHERE user_id = ${userId}
-      AND id =
+      DELETE FROM items
+      WHERE user_id = $1
+      AND id = $2
     `;
 
     db
-      .query(queryString, query)
-
+      .query(queryString, queryParams)
+      .then(()=> {
+        return res.redirect('/api/listings');
+      })
+      .catch(err => console.log('Error: ', err.stack));
   });
 
   return router;
