@@ -4,12 +4,14 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userId = req.session['user_id'];
-    let templateVars = { user: userId, items: {} };
+    let templateVars = { user: {}, items: {} };
+
 
     const queryString = `
-      SELECT *
+      SELECT users.name as user, items.*
       FROM items
-      WHERE user_id = $1;
+      FULL JOIN users ON items.user_id = users.id
+      WHERE items.user_id = $1;
     `;
     const queryParams = [userId];
     console.log(req.session)
@@ -25,6 +27,7 @@ module.exports = (db) => {
         for (item of items) {
           templateVars.items[item.id] = item;
         }
+        templateVars.user = items[0].user;
         return res.render('my-listings', templateVars);
       })
       .catch(err => console.log('Error: ', err.stack));
@@ -40,3 +43,16 @@ module.exports = (db) => {
 
 // Edge Cases:
 // if userId is not present
+
+// const userId = req.session['user_id'];
+// const queryString = `SELECT * FROM users WHERE id = $1`
+
+// db
+//   .query (queryString, [userId])
+//   .then(result => {
+//     const userInfo = result.rows[0];
+//     templateVars = {user: userInfo}
+//     console.log(userInfo)
+//     return res.render("search", templateVars);
+//   })
+//   .catch(err => console.log('Error: ', err.stack))

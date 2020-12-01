@@ -14,6 +14,10 @@ module.exports = (db) => {
     const userId = req.session['user_id'];
     const templateVars = { user: userId };
 
+    if (userId) {
+      return res.redirect("/");
+    }
+
     res.render("register", templateVars);
   });
 

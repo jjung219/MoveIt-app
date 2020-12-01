@@ -4,10 +4,17 @@ const router = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userId = req.session['user_id'];
-    const templateVars = { user: userId };
+    const queryString = `SELECT * FROM users WHERE id = $1`
 
-    console.log(req.session);
-    res.render("new", templateVars);
+    db
+      .query (queryString, [userId])
+      .then(result => {
+        const userInfo = result.rows[0];
+        templateVars = {user: userInfo}
+        console.log(userInfo)
+        return res.render("search", templateVars);
+      })
+      .catch(err => console.log('Error: ', err.stack))
   });
 
   const addListing = function (listing) {
