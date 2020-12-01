@@ -54,6 +54,7 @@ const myListingsRoutes = require("./routes/my-listings");
 const newRoutes = require("./routes/new");
 const removeListingRoutes = require("./routes/my-listings-remove");
 const markItemRoutes = require("./routes/my-listings-mark-item");
+const contactRoutes = require("./routes/contact");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -72,6 +73,7 @@ app.use("/login",loginRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/listings", removeListingRoutes(db));
 app.use("/listings", markItemRoutes(db));
+app.use("/contact", contactRoutes(db));
 
 
 // Home page

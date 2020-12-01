@@ -29,3 +29,9 @@ CREATE TABLE favorites (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 
+CREATE TABLE contact (
+  id SERIAL PRIMARY KEY NOT NULL,
+  from VARCHAR(255) NOT NULL,
+  to VARCHAR(255) NOT NULL,
+  content TEXT
+)
