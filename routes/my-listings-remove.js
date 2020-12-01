@@ -16,7 +16,7 @@ module.exports = (db) => {
     db
       .query(queryString, queryParams)
       .then(()=> {
-        return res.redirect('/api/listings');
+        return res.redirect('/listings');
       })
       .catch(err => console.log('Error: ', err.stack));
   });

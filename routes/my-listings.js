@@ -14,16 +14,16 @@ module.exports = (db) => {
 
     queryParams = [userId];
     db
-    .query(queryString, queryParams)
-    .then(result => {
-      const items = result.rows;
-      const templateVars = { items: {} };
-      for (item of items) {
-        templateVars.items[item.id] = item;
-      }
-      return res.render('my-listings', templateVars);
-    })
-    .catch(err => console.log('Error: ', err.stack));
+      .query(queryString, queryParams)
+      .then(result => {
+        const items = result.rows;
+        const templateVars = { items: {} };
+        for (item of items) {
+          templateVars.items[item.id] = item;
+        }
+        return res.render('my-listings', templateVars);
+      })
+      .catch(err => console.log('Error: ', err.stack));
 
   });
 

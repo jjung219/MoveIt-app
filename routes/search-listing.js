@@ -7,7 +7,7 @@ module.exports = (db) => {
     console.log("Searching listings...");
 
     const search = req.body;
-    const searchedItem = `${req.body['item-name']}`;
+    const searchedItem = req.body['item-name'];
     const searchedMinPrice = req.body['min-price'];
     const searchedMaxPrice = req.body['max-price'];
     console.log(search);
@@ -21,7 +21,7 @@ module.exports = (db) => {
     // if name is present
     if (searchedItem) {
       queryParams.push(`%${searchedItem}%`);
-      queryString += `WHERE name LIKE LOWER($${queryParams.length})`;
+      queryString += `WHERE name LIKE $${queryParams.length}`;
       if (searchedMinPrice) {
         // if name and min-price present
         queryParams.push(searchedMinPrice);
@@ -58,6 +58,7 @@ module.exports = (db) => {
     .query(queryString, queryParams)
     .then(result => {
       const items = result.rows;
+      console.log(items);
       const templateVars = { items: {} };
       for (item of items) {
         templateVars.items[item.id] = item;
