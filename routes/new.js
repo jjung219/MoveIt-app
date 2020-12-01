@@ -3,8 +3,11 @@ const router = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
+    const userId = req.session['user_id'];
+    const templateVars = { user: userId };
+
     console.log(req.session);
-    res.render("new");
+    res.render("new", templateVars);
   });
 
   const addListing = function (listing) {

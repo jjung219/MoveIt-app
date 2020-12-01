@@ -31,7 +31,7 @@ if(!user){
   getUserwithEmail(email)
   .then(user=>{
     req.session['user_id'] = user.id;
-    res.redirect("/listings")
+    res.redirect("/")
   })
 }
   });
