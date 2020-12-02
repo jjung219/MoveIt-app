@@ -4,7 +4,9 @@ body {
   }
 }
 
-.card-footer {
-  display: flex;
-  justify-content: space-between;
+#my-listings {
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+  }
 }

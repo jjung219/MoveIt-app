@@ -2,6 +2,7 @@
 
 body {
   background-color: #eee;
+  height: 100vh;
 
   .container {
     margin-top: 5rem;
@@ -10,5 +11,11 @@ body {
 
   h1 {
     color: #244751;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
   }
 }
