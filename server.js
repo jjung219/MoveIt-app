@@ -98,13 +98,19 @@ app.get("/", (req, res) => {
   .then(result => {
     userId = req.session['user_id']
     items = (result.rows);
-    templateVar = { itemsArr: items, user: userId}
-    // console.log(items)
-    res.render('index', templateVar)
+
+    db
+      .query (`SELECT * FROM users WHERE id = $1`, [userId])
+      .then(result => {
+        const userInfo = result.rows[0];
+        templateVar = { itemsArr: items, user: userInfo}
+        return res.render('index', templateVar);
+
+      })
+      .catch(err => console.log('Error: ', err.stack))
   })
   .catch(e => console.log(e.stack))
 });
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

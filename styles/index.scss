@@ -1,0 +1,17 @@
+div.col-lg-3 {
+  .card-footer {
+    margin-bottom: 0;
+  }
+}
+
+.card.h-100 {
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-footer.btn {
+    justify-content: center;
+  }
+}
