@@ -10,6 +10,7 @@ module.exports = (db) => {
     const templateVars = { user: userId, reciever_id:reciever_id};
     res.render("message", templateVars);
   })
+
   const messages = function(sender_id,reciever_id){
  return  db.query(`SELECT * FROM messages WHERE sender_id=$1 AND reciever_id=$2`,[sender_id,reciever_id])
   .then(res=> res.rows[0].content)
@@ -23,12 +24,14 @@ module.exports = (db) => {
   }
 
   router.post("/:id/",(req,res)=>{
+    console.log(req.body)
     const reciever_id = req.params.id;
-    const content = req.body.message;
+    const content = req.body.content;
     const sender_id = req.session.user_id;
     newMessage(content,sender_id,reciever_id)
     .then(message=>{
-      console.log(message)
+      console.log(message);
+      res.send("success");
     })
   })
   return router;

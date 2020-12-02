@@ -1,17 +1,17 @@
 INSERT INTO
   users(name, email, password)
 VALUES
-  ('John', 'joh@ymail.com', 'password');
+  ('John', 'joh@ymail.com', 'password','+18733546494');
 
 INSERT INTO
   users(name, email, password)
 VALUES
-  ('Amy', 'amy@ymail.com', 'password');
+  ('Amy', 'amy@ymail.com', 'password','+18733546494');
 
 INSERT INTO
   users(name, email, password)
 VALUES
-  ('Alice', 'alice@gmail.com', 'password');
+  ('Alice', 'alice@gmail.com', 'password','+18733546494');
 
 INSERT INTO
   items(
