@@ -93,9 +93,9 @@
                   </div>
                   <div class="card-footer">
                     <% if (itemsArr[item].active) { %>
-                      <p>Available</p>
+                      <span>Available</span>
                     <% } else { %>
-                      <p style="color: red;">SOLD</p>
+                      <span style="color: red;">SOLD</span>
                     <% } %>
                     <form method="POST" action="/favourites">
                       <button><i class="fas fa-heart fa-2x"></i></button>
