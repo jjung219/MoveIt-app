@@ -84,3 +84,7 @@ INSERT INTO
   favorites(item_id, user_id)
 VALUES
 (1, 3);
+
+INSERT INTO messages(sender_id,reciever_id,content) VALUES(1,2,'Hello');
+INSERT INTO messages(sender_id,reciever_id,content) VALUES(2,1,'Hello world');
+INSERT INTO messages(sender_id,reciever_id,content) VALUES(2,1,'Hello');

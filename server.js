@@ -64,6 +64,7 @@ app.use("/", searchListingRoutes(db));
 app.use("/listings", myListingsRoutes(db));
 
 const loginRoutes = require("./routes/login");
+const messageRoutes = require("./routes/message");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -76,6 +77,7 @@ app.use("/listings", removeListingRoutes(db));
 app.use("/listings", markItemRoutes(db));
 app.use("/contact", contactRoutes(db));
 app.use("/logout", logoutRoutes(db));
+app.use("/message", messageRoutes(db));
 
 
 // Home page
