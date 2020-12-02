@@ -10,13 +10,21 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 var cookieSession = require('cookie-session');
 const morgan     = require('morgan');
-
-
+var cookieSession = require('cookie-session')
+const { Pool, Client } = require('pg')
 // PG database client/connection setup
-const { Pool } = require('pg');
-const dbParams = require('./lib/db.js');
-const db = new Pool(dbParams);
-db.connect();
+// const { Pool } = require('pg');
+// const dbParams = require('./lib/db.js');
+// const db = new Pool(dbParams);
+// db.connect();
+
+const db = new Pool({
+  user: 'labber',
+  host: 'localhost',
+  database: 'midterm',
+  password: 'labber',
+})
+db.connect().then(() => console.log('db conected'));
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -53,6 +61,7 @@ const searchListingRoutes = require("./routes/search-listing");
 const myListingsRoutes = require("./routes/my-listings");
 const newRoutes = require("./routes/new");
 const removeListingRoutes = require("./routes/my-listings-remove");
+const favouritesRoutes = require("./routes/favourites");
 const markItemRoutes = require("./routes/my-listings-mark-item");
 const logoutRoutes = require("./routes/logout");
 
@@ -67,6 +76,7 @@ const loginRoutes = require("./routes/login");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/register", RegisterRoutes(db));
+app.use("/favourites", favouritesRoutes(db));
 app.use("/widgets", widgetsRoutes(db));
 app.use("/new",newRoutes(db));
 app.use("/login",loginRoutes(db));
@@ -80,7 +90,19 @@ app.use("/logout", logoutRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  let items;
+  let userId;
+  let templateVar = {};
+  db
+  .query('SELECT * FROM items')
+  .then(result => {
+    userId = req.session['user_id']
+    items = (result.rows);
+    templateVar = { itemsArr: items, user: userId}
+    // console.log(items)
+    res.render('index', templateVar)
+  })
+  .catch(e => console.log(e.stack))
 });
 
 
