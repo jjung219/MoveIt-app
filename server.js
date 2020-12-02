@@ -84,6 +84,7 @@ app.use("/login",loginRoutes(db));
 app.use("/listings", removeListingRoutes(db));
 app.use("/listings", markItemRoutes(db));
 app.use("/logout", logoutRoutes(db));
+app.use("/favourites", favouritesRoutes(db));
 
 
 // Home page
