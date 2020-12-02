@@ -8,13 +8,7 @@
 
     <title>Search</title>
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link href="../css/shop-homepage.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/search.scss" type="text/css" />
+    <%- include('partials/_links') %>
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -29,7 +23,9 @@
   <!-- Search -->
   <main id="search">
     <div class="container">
-      <h1>Search</h1>
+      <div class="text-center">
+        <h1>Search</h1>
+      </div>
       <form method="POST" action="/">
         <div class="form-group">
           <h6><label for="item-name">Name</label></h6>
@@ -51,8 +47,8 @@
             <span class="input-group-text">.00</span>
           </div>
         </div>
-        <div id="search-btn">
-          <button type="submit" class="btn btn-primary">Search</button>
+        <div class="text-center">
+          <button type="submit" class="btn btn-lg btn-primary">Search</button>
         </div>
       </form>
     </div>
