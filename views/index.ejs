@@ -20,9 +20,11 @@
 
   </head>
 
-  <body>
+  <header>
     <%- include('partials/_header') %>
-  </nav>
+  </header>
+    <body>
+    </nav>
 
 
       <div class="col-lg-9">
@@ -54,7 +56,7 @@
           </a>
         </div>
 
-        <%  for(let item in itemsArr) { console.log(itemsArr[item]); %>
+        <%  for(let item in itemsArr) { %>
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
               <div class="card h-100">
@@ -80,7 +82,7 @@
             </div>
             <% } %>
 
-  /.container
+
 
   <!-- Footer -->
   <footer class="py-5 bg-dark">

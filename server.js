@@ -61,12 +61,9 @@ const searchListingRoutes = require("./routes/search-listing");
 const myListingsRoutes = require("./routes/my-listings");
 const newRoutes = require("./routes/new");
 const removeListingRoutes = require("./routes/my-listings-remove");
-<<<<<<< HEAD
 const favouritesRoutes = require("./routes/favourites");
-=======
 const markItemRoutes = require("./routes/my-listings-mark-item");
 const logoutRoutes = require("./routes/logout");
->>>>>>> 59421aa02d1e2d5a0d888e912a98e1c7038796ed
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -93,22 +90,19 @@ app.use("/logout", logoutRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-<<<<<<< HEAD
-  let templateVar = {};
   let items;
-  // res.render('index')
+  let userId;
+  let templateVar = {};
   db
   .query('SELECT * FROM items')
   .then(result => {
+    userId = req.session['user_id']
     items = (result.rows);
-    templateVar.itemsArr = items;
+    templateVar = { itemsArr: items, user: userId}
+    // console.log(items)
     res.render('index', templateVar)
-    // console.log(templateVar)
   })
   .catch(e => console.log(e.stack))
-=======
-  res.render("index");
->>>>>>> 59421aa02d1e2d5a0d888e912a98e1c7038796ed
 });
 
 

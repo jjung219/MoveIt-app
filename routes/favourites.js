@@ -3,8 +3,8 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    const userId = req.session['user_id'];
-    console.log(userId)
+    let userId;
+    let items;
     const queryString = `
     SELECT *
     FROM items
@@ -15,7 +15,10 @@ module.exports = (db) => {
     db
     .query(queryString, [userId])
     .then(result => {
-      console.log(result.rows)
+      userId = req.session['user_id']
+      items = (result.rows);
+      templateVar = { itemsArr: items, user: userId}
+      res.render('favourites', templateVar)
     })
     .catch(e => console.log(e.stack))
 

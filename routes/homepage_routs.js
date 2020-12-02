@@ -8,7 +8,7 @@ app.get('/', (req, res) =>{
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    console.log(req.body)
+    // console.log(req.body)
     res.send("Hello")
   });
   return router;
