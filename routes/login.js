@@ -18,16 +18,16 @@ module.exports = (db) => {
       .catch(err => console.log(err));
   }
 
-  const checkUserAuth = function(name,email,password){
- return db.query(`SELECT * FROM users WHERE name=$1 AND email=$2 AND password= $3`,[name,email,password])
+  const checkUserAuth = function(email,password){
+ return db.query(`SELECT * FROM users WHERE email=$1 AND password= $2`,[email,password])
  .then(user=>user.rows[0])
  .catch(err=>console.log(err));
   }
 
   router.post("/",(req,res)=>{
-const {name,email,password}  = req.body;
+const {email,password}  = req.body;
 //  console.log(name,email,password)
- checkUserAuth(name,email,password)
+ checkUserAuth(email,password)
 .then(user=>{
 if(!user){
   res.send("Invalid details")

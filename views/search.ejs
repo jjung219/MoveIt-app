@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/search.scss" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -26,31 +27,33 @@
     <%- include('partials/_header') %>
   </header>
   <!-- Search -->
-  <main>
+  <main id="search">
     <div class="container">
       <h1>Search</h1>
       <form method="POST" action="/">
         <div class="form-group">
-          <label for="item-name">Name</label>
-          <input id ="item-name" type="text" class="form-control" name="item-name">
+          <h6><label for="item-name">Name</label></h6>
+          <input id ="item-name" type="text" class="form-control" name="item-name" placeholder="Search for item...">
         </div>
         <div class="input-group mb-3">
-          <label for="minimum-price">Minimum-price</label>
+          <h6><label for="minimum-price">Minimum Price: </label></h6>
           <input id="minimum-price" type="number" class="form-control" name="min-price" aria-label="Dollar amount (with dot and two decimal places)">
           <div class="input-group-prepend">
             <span class="input-group-text">$</span>
             <span class="input-group-text">.00</span>
           </div>
         </div>
-        <div class="input-group">
-          <label for="maximum-price">Maximum-price</label>
+        <div class="input-group mb-3">
+          <h6><label for="maximum-price">Maximum Price: </label></h6>
           <input id="maximum-price" type="number" class="form-control" name="max-price" aria-label="Dollar amount (with dot and two decimal places)">
           <div class="input-group-append">
             <span class="input-group-text">$</span>
             <span class="input-group-text">.00</span>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <div id="search-btn">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
       </form>
     </div>
   </main>

@@ -30,8 +30,7 @@ module.exports = (db) => {
      if(userId){
     //  console.log(req.session);
     addListing({...req.body, user_id: userId })
-      .then(listing => {
-
+      .then(() => {
         res.redirect("/listings")
       })
       .catch(err => console.log(err));

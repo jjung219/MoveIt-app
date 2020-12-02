@@ -10,9 +10,10 @@
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link href="../css/shop-homepage.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -23,23 +24,22 @@
     <%- include('partials/_header') %>
   </header>
   <body>
-    <h1>Need to be deleted later</h1>
-    <h1>Create New Listing</h1>
-    <form action="/new" method="POST">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-
-          <input type="text" class="form-control" id="inputname4" placeholder="Name" name="name">
+    <div class="container">
+      <h1>Create New Listing</h1>
+      <form action="/new" method="POST">
+        <div class="form-group">
+          <label for="inputname4">Item</label>
+          <input type="text" class="form-control" id="inputname4" placeholder="Enter item..." name="name">
         </div>
-        <div class="form-group col-md-6">
-          <input type="text" class="form-control" id="Price4" placeholder="Price" name="price">
+        <div class="form-group">
+          <label for="Price4">Price</label>
+          <input type="number" class="form-control" id="Price4" placeholder="Enter price..." name="price">
         </div>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" id="inputImage" placeholder="Image_url" name="photo_url">
-      </div>
-
-        <div class="form-group col-md-4">
+        <div class="form-group">
+          <label for="inputImage">Image URL</label>
+          <input type="text" class="form-control" id="inputImage" placeholder="Enter image_url..." name="photo_url">
+        </div>
+        <div class="form-group">
           <label for="inputcondition">Condition</label>
           <select id="inputcondition" class="form-control" name="condition">
             <option selected>Choose...</option>
@@ -49,10 +49,23 @@
         </div>
         <div class="form-group">
           <label for="inputDescription">Description</label>
-          <textarea placeholder="Description" name="description" cols="30" rows="10" name="description"></textarea>
+          <textarea class="form-control" placeholder="Enter description..." name="description" rows="5" name="description"></textarea>
         </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Create</button>
-    </form>
-  </body>
+          <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </div>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+    </div>
+  <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
+

@@ -10,9 +10,11 @@
 
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link href="../css/shop-homepage.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/my-listing.css" type="text/css">
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
@@ -43,7 +45,7 @@
                 </h4>
                 <h5>$<%= items[item].price %></h5>
                 <p class="card-text"><%= items[item].description %></p>
-                <p class="card-text">Condition: <%= items[item].condition %></p>
+                <h6>Condition: <%= items[item].condition %></h6>
               </div>
               <div class="card-footer">
                 <% if (items[item].active) {%>
@@ -56,6 +58,8 @@
                 <%} else {%>
                   <a href=""><i class="far fa-heart fa-2x"></i></a>
                 <%}%>
+              </div>
+              <div id="listing-btn" class="card-footer">
                 <form action="/listings/<%= item %>/delete" method="POST">
                   <button id="remove-btn" class="btn btn-secondary" type="submit">Remove</button>
                 </form>
