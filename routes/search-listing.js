@@ -4,13 +4,13 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.post("/", (req, res) => {
+    const userId = req.session['user_id'];
     console.log("Searching listings...");
 
     const search = req.body;
     const searchedItem = req.body['item-name'];
     const searchedMinPrice = req.body['min-price'];
     const searchedMaxPrice = req.body['max-price'];
-    console.log(search);
     const queryParams = [];
 
     let queryString = `
@@ -52,18 +52,26 @@ module.exports = (db) => {
       queryString += `WHERE price <= $${queryParams.length}`;
     }
 
-    console.log('query:', queryString);
-    console.log('params: ',queryParams)
+    // console.log('query:', queryString);
+    // console.log('params: ',queryParams)
     db
     .query(queryString, queryParams)
     .then(result => {
       const items = result.rows;
-      console.log(items);
-      const templateVars = { items: {} , user: req.session['user_id'] };
+      const templateVars = { itemsArr: {} , user: req.session['user_id'] };
       for (item of items) {
-        templateVars.items[item.id] = item;
+        templateVars.itemsArr[item.id] = item;
       }
-      return res.render('index-search', templateVars);
+      db.query(`SELECT item_id
+      FROM favorites
+      where favorites.user_id = $1`, [userId])
+        .then(result => {
+          favouritesIds = result.rows
+          templateVars.favourited = false
+          templateVars.favIds = favouritesIds.map(itemFav => itemFav.item_id)
+
+          return res.render('index', templateVars)
+        })
     })
     .catch(err => console.log('Error: ', err.stack));
 
