@@ -27,7 +27,7 @@ module.exports = (db) => {
             .then(email => {
               console.log(email, receiver_id)
               helpers.newMessage(email.email, sender_id, item_id, content, receiver_id.user_id)
-                .then(message => res.send("<h1>Message sent</h1>"))
+                .then(message => res.redirect("/"))
             })
         })
     } else {
