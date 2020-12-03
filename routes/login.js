@@ -15,11 +15,22 @@ module.exports = (db) => {
 
     res.render("login", templateVars);
   });
+  const getUserwithEmail = function (email) {
+    return db.query(`SELECT * FROM users WHERE email=$1`, [email])
+      .then(res => res.rows[0])
+      .catch(err => console.log(err));
+  }
+
+  const checkUserAuth = function(email,password){
+ return db.query(`SELECT * FROM users WHERE email=$1 AND password= $2`,[email,password])
+ .then(user=>user.rows[0])
+ .catch(err=>console.log(err));
+  }
 
   router.post("/",(req,res)=>{
-const {name,email,password}  = req.body;
- console.log(name,email,password)
- helpers.checkUserAuth(name,email,password)
+const {email,password}  = req.body;
+//  console.log(name,email,password)
+ checkUserAuth(email,password)
 .then(user=>{
 if(!user){
   res.send("Invalid details")
