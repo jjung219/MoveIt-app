@@ -115,44 +115,51 @@
 
 
             <!-- NEEED TO FIX BOOTSTRAP -->
+            <div class="row">
             <%  for(let item in itemsArr) { %>
-              <div class="row">
-                  <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="card h-100">
-                      <a href="#"><img class="card-img-top" src="<%= itemsArr[item].photo_url %>"> </a>
-                      <div class="card-body">
-                        <h4 class="card-title">
-                          <a href="#"><%= itemsArr[item].name %></a>
-                        </h4>
-                        <h5>$<%= itemsArr[item].price %></h5>
-                        <p class="card-text"><%= itemsArr[item].description %></p>
-                      </div>
-                      <span> <button>message</button></span>
-                      <div class="card-footer">
-                        <% favourited = false %>
-                        <%  for(let favs in favIds) { %>
-                          <% if (itemsArr[item].id === favIds[favs].id) { favourited = true }%>
-                          <% } %>
-                          <% if (favourited === true) { %>
-                            <small>
-                              <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete"><button>favourited</button></form>
-                            </small>
-                            <% } else { %>
-                            <small>
-                              <form method="POST" action="/favourites/<%= itemsArr[item].id %>"><button>not favourited</button></form>
-                            </small>
-                            <% } %>
-                        <small>condition = <%= itemsArr[item].condition %></small>
-                        <% if (itemsArr[item].active) { %>
-                        <small>For Sale</small>
-                        <% } else { %>
-                        <span style="color: red;">SOLD</span>
-                        <% } %>
-                      </div>
-                  <% } %>
-              <!-- END -->
+              <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                  <a href="#"><img class="card-img-top" src="<%= itemsArr[item].photo_url %>"> </a>
+                  <div class="card-body">
+                    <h4 class="card-title">
+                      <a href="#"><%= itemsArr[item].name %></a>
+                    </h4>
+                    <h5>$<%= itemsArr[item].price %></h5>
+                    <p class="card-text"><%= itemsArr[item].description %></p>
+                    <p class="card-text">Condition: <%= itemsArr[item].condition %></p>
+                  </div>
+                  <div class="card-footer">
+                    <% if (itemsArr[item].active) { %>
+                      <span>Available</span>
+                    <% } else { %>
+                    <span style="color: red;">SOLD</span>
+                    <% } %>
+                    <% favourited = false %>
+                    <%  for(let favs in favIds) { %>
+                      <% if (itemsArr[item].id === favIds[favs].id) { favourited = true }%>
+                      <% } %>
+                      <% if (favourited === true) { %>
+                      <small>
+                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete"><button>favourited</button></form>
+                      </small>
+                      <% } else { %>
+                      <small>
+                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>">
+                          <button>not favourited</button>
+                        </form>
+                      </small>
+                      <% } %>
+                  </div>
+                  <div class="card-footer btn">
+                    <form action="/message/<%= itemsArr[item].id %>">
+                      <button type="submit" class="btn btn-primary">Message</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            <% } %>
+            <!-- END -->
 
-          </div>
       </div>
     </div>
 
