@@ -70,11 +70,7 @@
                 </div>
                 <span> <button>message</button></span>
                 <div class="card-footer">
-                  <% favourited = false %>
-                  <%  for(let favs in favIds) { %>
-                    <% if (itemsArr[item].id === favIds[favs].id) { favourited = true }%>
-                    <% } %>
-                    <% if (favourited === true) { %>
+                 <% if (favIds.includes(itemsArr[item].id)) {%>
                       <small>
                         <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete"><button>favourited</button></form>
                       </small>

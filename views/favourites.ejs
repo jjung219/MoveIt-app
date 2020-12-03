@@ -47,7 +47,9 @@
                 </div>
                 <span> <button>message</button></span>
                 <div class="card-footer">
-                  <small><form method="POST" action="/favourites"><button>favourit</button></form></small>
+                      <small>
+                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete?redirect=/favourites"><button>favourited</button></form>
+                      </small>
                   <small>condition = <%= itemsArr[item].condition %></small>
                   <% if (itemsArr[item].active) { %>
                   <small>For Sale</small>
