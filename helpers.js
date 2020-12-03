@@ -25,7 +25,7 @@ module.exports = (db) => {
 
   }
   const receivedMessages = function (receiver_id) {
-    return db.query(`SELECT sender_email,content,items.name FROM messages JOIN Items ON  messages.item_id = items.id WHERE receiver_id=$1`, [receiver_id])
+    return db.query(`SELECT sender_email,content,items.name FROM messages JOIN items ON  messages.item_id = items.id WHERE receiver_id=$1`, [receiver_id])
       .then(res => res.rows[0])
       .catch(err => console.log(err));
   }
