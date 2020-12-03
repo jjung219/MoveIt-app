@@ -64,6 +64,7 @@ const removeListingRoutes = require("./routes/my-listings-remove");
 const favouritesRoutes = require("./routes/favourites");
 const markItemRoutes = require("./routes/my-listings-mark-item");
 const logoutRoutes = require("./routes/logout");
+const removeMessageRoutes = require("./routes/user-messages-remove");
 
 
 // Mount all resource routes
@@ -89,6 +90,7 @@ app.use("/listings", markItemRoutes(db));
 app.use("/logout", logoutRoutes(db));
 app.use("/message",newMessageRoutes(db));
 app.use("/messages",messageRoutes(db));
+app.use("/messages", removeMessageRoutes(db));
 
 
 // Home page

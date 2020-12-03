@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Login Page</title>
+  <title>Messages</title>
 
   <%- include('partials/_links') %>
 
@@ -32,18 +32,15 @@
       <% } else {%>
         <div class="messages-container">
           <% for (let message in messages) {%>
-            <div class="card border-primary mb-3" style="max-width: 50rem;">
+            <div class="card border-primary mb-3" style="max-width: 25rem;">
               <div class="card-header">RECEIVED MESSAGE</div>
               <div class="card-body text-primary">
-                <p class="card-text">Message: <%= messages[message].content %></p>
-                <p class="card-text"> Buyer: <%= messages[message].sender_email %></p>
-                <p class="card-text">Item: <%= messages[message].name %></p>
+                <p class="card-text"><h5>Message:</h5> <%= messages[message].content %></p>
+                <p class="card-text"><strong>Buyer:</strong> <%= messages[message].sender_email %></p>
+                <p class="card-text"><strong>Item:</strong> <%= messages[message].name %></p>
               </div>
               <div class="card-footer">
-                <form action="/listings/<%= item %>/delete" method="POST">
-                  <button id="remove-btn" class="btn btn-secondary" type="submit">Remove</button>
-                </form>
-                <form action="/message" method="POST">
+                <form action="/messages/<%= messages[message].id %>/delete" method="POST">
                   <button id="remove-btn" class="btn btn-secondary" type="submit">Remove</button>
                 </form>
               </div>
