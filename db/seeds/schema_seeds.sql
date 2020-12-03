@@ -78,9 +78,9 @@ VALUES
 INSERT INTO
   favorites(item_id, user_id)
 VALUES
-(2, 2);
+(2, 7);
 
 INSERT INTO
   favorites(item_id, user_id)
 VALUES
-(1, 3);
+(1, 8);

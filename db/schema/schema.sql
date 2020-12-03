@@ -26,4 +26,3 @@ CREATE TABLE favorites (
   item_id INTEGER REFERENCES items(id) ON DELETE CASCADE,
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
-
