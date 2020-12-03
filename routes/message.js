@@ -19,10 +19,11 @@ module.exports = (db) => {
     const reciever_id = req.params.id;
     const content = req.body.content;
     const sender_id = req.session.user_id;
+    const buyerEmail = req.body.email;
     helpers.newMessage(content,sender_id,reciever_id)
     .then(message=>{
       console.log(message);
-      res.send("success");
+      res.send(buyerEmail,message);
     })
   })
   return router;

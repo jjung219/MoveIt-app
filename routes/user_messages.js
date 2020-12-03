@@ -1,17 +1,17 @@
 const express = require('express');
 const router  = express.Router();
+const initHelpers = require('../helpers.js');
 module.exports = (db) => {
+  const helpers = initHelpers(db);
 
   router.get("/",(req,res)=>{
-    res.send("dhfkhskd")
+    const reciever_id = req.session.user_id;
+  helpers.messages(reciever_id)
+   .then(message=>{
+     res.render("user_messages")
+   })
   })
   return router;
 }
 
 
-
-const messages = function(sender_id,reciever_id){
-  return  db.query(`SELECT * FROM messages WHERE sender_id=$1 AND reciever_id=$2`,[sender_id,reciever_id])
-   .then(res=> res.rows[0].content)
-     .catch(err=>console.log.log(err));
-   }

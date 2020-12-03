@@ -30,8 +30,9 @@
 <body>
   <form action="/message/<%= reciever_id %>" method="POST">
     <div class="form-group">
-      <label for="inputDescription">Description</label>
-      <textarea placeholder="Description" cols="30" rows="10" name="content"></textarea>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+      <label for="inputMessage">Message</label>
+      <textarea placeholder="Your Message" cols="30" rows="10" name="content"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Send</button>
   </form>
