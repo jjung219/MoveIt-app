@@ -5,8 +5,8 @@
 // const client = require('twilio')(accountSid, authToken);
 
 
-// const sgMail = require('@sendgrid/mail')
-// sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+// // const sgMail = require('@sendgrid/mail')
+// // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
 // module.exports = (db) => {
@@ -35,37 +35,34 @@
 //     client.messages
 //       .create({
 //          body: 'Hello',
-//          from: '+12513197721',
+//          from: '',
 //          to: ''
 //        })
 //       .then(message => console.log(message.sid))
 //       .done();
 
-  // toEmail(itemId).then(user=>{
+//   // toEmail(itemId).then(user=>{
 
-  //   const msg = {
-  //     to: user.email, // Change to your recipient
-  //     from: email,    // Change to your verified sender
-  //     subject: subject,
-  //    text: message,
-  //    html: `<strong>${message}</strong>`,
-  //  }
-  //  sgMail
-  //    .send(msg)
-  //    .then(() => {
-  //      console.log('Email sent')
-  //      res.send("Email sent");
-  //    })
-  //    .catch((error) => {
-  //      console.error(error.response.body)
-  //    })
-  //  });
+//   //   const msg = {
+//   //     to: user.email, // Change to your recipient
+//   //     from: email,    // Change to your verified sender
+//   //     subject: subject,
+//   //    text: message,
+//   //    html: `<strong>${message}</strong>`,
+//   //  }
+//   //  sgMail
+//   //    .send(msg)
+//   //    .then(() => {
+//   //      console.log('Email sent')
+//   //      res.send("Email sent");
+//   //    })
+//   //    .catch((error) => {
+//   //      console.error(error.response.body)
+//   //    })
+//   //  });
 
 //   })
 //   return router;
 // }
 
 
-//sid
-// AC61d0166b8786243c9e0dc45e168c8363
-// e3161d13cbfa9bbe7e1f2c57486221d1 token

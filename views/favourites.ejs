@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>MoveIt</title>
+    <title>My Favourites</title>
 
     <%- include('partials/_links') %>
 
@@ -16,54 +16,43 @@
     <script src="https://kit.fontawesome.com/f4a4038515.js" crossorigin="anonymous"></script>
 
   </head>
-
   <body>
   <header>
     <%- include('partials/_header') %>
   </header>
   <main>
     <div class="container">
-      <div id="my-listings-header" class="text-center">
+      <div class="text-center">
         <h1>My Favourites</h1>
       </div>
       <div class="row">
-          <%  for(let item in itemsArr) { %>
-              <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100">
-                  <a href="#"><img class="card-img-top" src="<%= itemsArr[item].photo_url %>"> </a>
-                  <div class="card-body">
-                    <h4 class="card-title">
-                      <a href="#"><%= itemsArr[item].name %></a>
-                    </h4>
-                    <h5>$<%= itemsArr[item].price %></h5>
-                    <p class="card-text"><%= itemsArr[item].description %></p>
-                  </div>
-                  <span> <button>message</button></span>
-                  <div class="card-footer">
-                    <%  for(let favs in favIds) { %>
-                      <% if (user === favIds[favs].favorited_by && itemsArr[item].id === favIds[favs].id) { favourited = true} else {favourited = false}%>
-                      <% } %>
-                      <% if (favourited === true) { %>
-                        <small>
-                          <form method="POST" action="/favourites/<%= itemsArr[item].id %>"><button>favo</button></form>
-                        </small>
-                        <% } else { %>
-                        <small>
-                          <form method="POST" action="/favourites/<%= itemsArr[item].id %>"><button>favourite</button></form>
-                        </small>
-                        <% } %>
-                    <small>condition = <%= itemsArr[item].condition %></small>
-                    <% if (itemsArr[item].active) { %>
-                    <small>For Sale</small>
-                    <% } else { %>
-                    <span style="color: red;">SOLD</span>
-                    <% } %>
-                  </div>
-                </div>
+        <%  for(let item in itemsArr) { %>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100">
+              <a href="#"><img class="card-img-top" src="<%= itemsArr[item].photo_url %>"> </a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="#"><%= itemsArr[item].name %></a>
+                </h4>
+                <h5>$<%= itemsArr[item].price %></h5>
+                <p class="card-text"><%= itemsArr[item].description %></p>
               </div>
-              <% } %>
+              <span> <button>message</button></span>
+              <div class="card-footer">
+                <small><form method="POST" action="/favourites"><button>favourit</button></form></small>
+                <small>condition = <%= itemsArr[item].condition %></small>
+                <% if (itemsArr[item].active) { %>
+                <small>For Sale</small>
+                <% } else { %>
+                <span style="color: red;">SOLD</span>
+                <% } %>
+              </div>
+          </div>
+          <% } %>
+      </div>
     </div>
   </main>
+
 
     <!-- Footer & Bootstrap core JavaScript-->
     <%- include('partials/_footer') %>

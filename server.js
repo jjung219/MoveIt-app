@@ -63,7 +63,10 @@ const newRoutes = require("./routes/new");
 const removeListingRoutes = require("./routes/my-listings-remove");
 const favouritesRoutes = require("./routes/favourites");
 const markItemRoutes = require("./routes/my-listings-mark-item");
+// const contactRoutes = require("./routes/contact");
 const logoutRoutes = require("./routes/logout");
+
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -72,7 +75,8 @@ app.use("/", searchListingRoutes(db));
 app.use("/listings", myListingsRoutes(db));
 
 const loginRoutes = require("./routes/login");
-const messageRoutes = require("./routes/new-message");
+const newMessageRoutes = require("./routes/message");
+const messageRoutes = require("./routes/user_messages");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -84,8 +88,10 @@ app.use("/login",loginRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/listings", removeListingRoutes(db));
 app.use("/listings", markItemRoutes(db));
+// app.use("/contact", contactRoutes(db));
 app.use("/logout", logoutRoutes(db));
-app.use("/message", messageRoutes(db));
+app.use("/message",newMessageRoutes(db));
+app.use("/messages",messageRoutes(db));
 
 
 // Home page
@@ -100,18 +106,23 @@ app.get("/", (req, res) => {
   .then(result => {
     userId = req.session['user_id']
     items = (result.rows);
-
-    db
-      .query (`SELECT * FROM users WHERE id = $1`, [userId])
-      .then(result => {
-        const userInfo = result.rows[0];
-        templateVar = { itemsArr: items, user: userInfo}
-        return res.render('index', templateVar);
-
-      })
-      .catch(err => console.log('Error: ', err.stack))
+    templateVar = { itemsArr: items, user: userId}
+    queryString = `SELECT items.id, favorites.user_id as favorited_by
+    FROM items
+    join favorites on favorites.item_id = items.id
+    where favorites.user_id = $1;
+    `
+    db.query(queryString, [userId])
+    .then(result => {
+      favouritesIds = result.rows
+      templateVar.favourited = false
+      templateVar.favIds = favouritesIds
+      console.log(templateVar)
+      res.render('index', templateVar)
+    })
   })
   .catch(e => console.log(e.stack))
+
 });
 
 app.listen(PORT, () => {

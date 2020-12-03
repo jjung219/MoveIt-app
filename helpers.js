@@ -23,12 +23,25 @@ module.exports = (db) => {
       .catch(err => console.log(err));
 
   }
+  const messages = function(sender_id,reciever_id){
+    return  db.query(`SELECT * FROM messages WHERE sender_id=$1 AND reciever_id=$2`,[sender_id,reciever_id])
+     .then(res=> res.rows[0].content)
+       .catch(err=>console.log(err));
+     }
+     const newMessage = function(message,sender_id,reciever_id){
+      return db.query(`INSERT INTO messages(sender_id,reciever_id,content) VALUES($1,$2,$3) RETURNING *`,[sender_id,reciever_id,message])
+      .then(res=>res.rows[0])
+      .catch(err=>console.log(err));
+    }
+
 
   return {
     getUserwithEmail,
     checkUserAuth,
     addNewUser,
-    addListing
+    addListing,
+    messages,
+    newMessage
   };
 }
 
