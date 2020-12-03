@@ -48,11 +48,6 @@
                   <%} else {%>
                     <span style="color: red;">SOLD</span>
                   <%}%>
-                  <% if (items[item].favorite) {%>
-                    <i class="fas fa-heart fa-2x"></i>
-                  <%} else {%>
-                    <a href=""><i class="far fa-heart fa-2x"></i></a>
-                  <%}%>
                 </div>
                 <div id="listing-btn" class="card-footer">
                   <form action="/listings/<%= item %>/delete" method="POST">
