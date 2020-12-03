@@ -22,7 +22,7 @@
   <header>
     <%- include('partials/_header') %>
   </header>
-  <main>
+  <main id="user-messages">
     <div class="container">
       <div class="text-center">
         <h1>Messages</h1>
@@ -30,17 +30,27 @@
       <% if (!messages) { %>
         <h2>No Messages</h2>
       <% } else {%>
-        <% for (let message in messages) {%>
-          <div class="card border-primary mb-3" style="max-width: 18rem;">
-            <div class="card-header">RECEIVED MESSAGES</div>
-            <div class="card-body text-primary">
-              <h5 class="card-text">Message: <%= messages[message].content %></h5>
-              <p class="card-text">sender_email: <%= messages[message].sender_email %></p>
-              <p class="card-text">Item-name: <%= messages[message].name %></p>
+        <div class="messages-container">
+          <% for (let message in messages) {%>
+            <div class="card border-primary mb-3" style="max-width: 50rem;">
+              <div class="card-header">RECEIVED MESSAGE</div>
+              <div class="card-body text-primary">
+                <p class="card-text">Message: <%= messages[message].content %></p>
+                <p class="card-text"> Buyer: <%= messages[message].sender_email %></p>
+                <p class="card-text">Item: <%= messages[message].name %></p>
+              </div>
+              <div class="card-footer">
+                <form action="/listings/<%= item %>/delete" method="POST">
+                  <button id="remove-btn" class="btn btn-secondary" type="submit">Remove</button>
+                </form>
+                <form action="/message" method="POST">
+                  <button id="remove-btn" class="btn btn-secondary" type="submit">Remove</button>
+                </form>
+              </div>
             </div>
-          </div>
-        <% } %>
+          <% } %>
       <% } %>
+        </div>
     </div>
   </main>
 
