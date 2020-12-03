@@ -7,9 +7,11 @@
 
 const express = require('express');
 const router = express.Router();
+const initHelpers = require('../helpers.js');
 
 
 module.exports = (db) => {
+  const helpers = initHelpers(db);
   router.get("/", (req, res) => {
     const userId = req.session['user_id'];
     const templateVars = { user: userId };
@@ -21,26 +23,16 @@ module.exports = (db) => {
     res.render("register", templateVars);
   });
 
-  const getUserwithEmail = function (email) {
-    return db.query(`SELECT * FROM users WHERE email=$1`, [email])
-      .then(res => res.rows[0])
-      .catch(err => console.log(err));
-  }
-  const addNewUser = function (name, email, password) {
-    return db.query(`INSERT INTO users(name,email,password) VALUES($1,$2,$3) RETURNING *`, [name, email, password])
-      .then(user => user.rows[0].id)
-      .catch(err => console.log(err));
-  }
 
   router.post("/", (req, res) => {
     const userName = req.body.userName;
     const userEmail = req.body.userEmail;
     const userPassword = req.body.userPassword;
     // console.log(userName,userEmail,userpassword);
-    getUserwithEmail(userEmail)
+    helpers.getUserwithEmail(userEmail)
       .then(user => {
         if (!user) {
-          addNewUser(userName, userEmail, userPassword)
+         helpers.addNewUser(userName, userEmail, userPassword)
             .then(userId => {
               console.log(`test:${userId}`);
               req.session.user_id = userId;
