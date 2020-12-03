@@ -9,8 +9,12 @@ module.exports = (db) => {
     if (reciever_id) {
       helpers.receivedMessages(reciever_id)
         .then(message => {
-          // console.log(message);
-          res.render("user_messages", { user: reciever_id, message: message.content, sender_email: message.sender_email, item_name: message.name })
+          db
+            .query(`SELECT * FROM users WHERE id = $1`, [reciever_id])
+            .then((result) => {
+              const userInfo = result.rows[0];
+              res.render("user_messages", { messages: message, user: userInfo })
+            })
         })
         .catch(err => console.log(err));
     } else {
@@ -19,5 +23,6 @@ module.exports = (db) => {
   });
   return router;
 }
+
 
 
