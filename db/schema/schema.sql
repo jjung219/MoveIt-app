@@ -16,7 +16,7 @@ CREATE TABLE items (
   name VARCHAR(255) NOT NULL,
   description TEXT,
   photo_url VARCHAR(255),
-  price VARCHAR  NOT NULL DEFAULT 0,
+  price INTEGER NOT NULL DEFAULT 0,
   condition VARCHAR (500) NOT NULL,
   active BOOLEAN NOT NULL DEFAULT TRUE
 );

@@ -9,9 +9,10 @@ module.exports = (db) => {
 
     const search = req.body;
     const searchedItem = req.body['item-name'];
-    const searchedMinPrice = req.body['min-price'];
-    const searchedMaxPrice = req.body['max-price'];
+    const searchedMinPrice = Number(req.body['min-price']);
+    const searchedMaxPrice = Number(req.body['max-price']);
     const queryParams = [];
+    console.log(search)
 
     let queryString = `
       SELECT *
@@ -52,16 +53,15 @@ module.exports = (db) => {
       queryString += `WHERE price <= $${queryParams.length}`;
     }
 
-    // console.log('query:', queryString);
-    // console.log('params: ',queryParams)
+    console.log('query:', queryString);
+    console.log('params: ',queryParams)
     db
     .query(queryString, queryParams)
     .then(result => {
       const items = result.rows;
-      const templateVars = { itemsArr: {} , user: req.session['user_id'] };
-      for (item of items) {
-        templateVars.itemsArr[item.id] = item;
-      }
+      console.log(items);
+      const templateVars = { itemsArr: items , user: req.session['user_id'] };
+
       db.query(`SELECT item_id
       FROM favorites
       where favorites.user_id = $1`, [userId])
@@ -69,11 +69,12 @@ module.exports = (db) => {
           favouritesIds = result.rows
           templateVars.favourited = false
           templateVars.favIds = favouritesIds.map(itemFav => itemFav.item_id)
-
+          console.log(templateVars)
           return res.render('index', templateVars)
         })
     })
     .catch(err => console.log('Error: ', err.stack));
+
 
   });
   return router;
