@@ -65,6 +65,8 @@ const favouritesRoutes = require("./routes/favourites");
 const markItemRoutes = require("./routes/my-listings-mark-item");
 const contactRoutes = require("./routes/contact");
 const logoutRoutes = require("./routes/logout");
+const loginRoutes = require("./routes/login");
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -105,10 +107,22 @@ app.get("/", (req, res) => {
     userId = req.session['user_id']
     items = (result.rows);
     templateVar = { itemsArr: items, user: userId}
-    // console.log(items)
-    res.render('index', templateVar)
+    queryString = `SELECT items.id, favorites.user_id as favorited_by
+    FROM items
+    join favorites on favorites.item_id = items.id
+    where favorites.user_id = $1;
+    `
+    db.query(queryString, [userId])
+    .then(result => {
+      favouritesIds = result.rows
+      templateVar.favourited = false
+      templateVar.favIds = favouritesIds
+      console.log(templateVar)
+      res.render('index', templateVar)
+    })
   })
   .catch(e => console.log(e.stack))
+
 });
 
 
