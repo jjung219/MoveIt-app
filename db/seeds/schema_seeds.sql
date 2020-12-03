@@ -1,17 +1,17 @@
 INSERT INTO
   users(name, email, password)
 VALUES
-  ('John', 'joh@ymail.com', 'password','+18733546494');
+  ('John', 'joh@ymail.com', 'password');
 
 INSERT INTO
   users(name, email, password)
 VALUES
-  ('Amy', 'amy@ymail.com', 'password','+18733546494');
+  ('Amy', 'amy@ymail.com', 'password');
 
 INSERT INTO
   users(name, email, password)
 VALUES
-  ('Alice', 'alice@gmail.com', 'password','+18733546494');
+  ('Alice', 'alice@gmail.com', 'password');
 
 INSERT INTO
   items(
@@ -78,13 +78,13 @@ VALUES
 INSERT INTO
   favorites(item_id, user_id)
 VALUES
-(2, 7);
+(2, 2);
 
 INSERT INTO
   favorites(item_id, user_id)
 VALUES
 (1, 3);
 
-INSERT INTO messages(sender_id,reciever_id,content) VALUES(1,2,'Hello');
-INSERT INTO messages(sender_id,reciever_id,content) VALUES(2,1,'Hello world');
-INSERT INTO messages(sender_id,reciever_id,content) VALUES(2,1,'Hello');
+INSERT INTO messages(sender_email,sender_id,receiver_id,content,item_id) VALUES('amy@ymail.com',1,2,'Hello',2);
+INSERT INTO messages(sender_email,sender_id,receiver_id,content,item_id) VALUES('alice@gmail.com',2,1,'Hello world',2);
+INSERT INTO messages(sender_email,sender_id,receiver_id,content,item_id) VALUES('alice@gmail.com',2,1,'Hello',2);

@@ -63,7 +63,6 @@ const newRoutes = require("./routes/new");
 const removeListingRoutes = require("./routes/my-listings-remove");
 const favouritesRoutes = require("./routes/favourites");
 const markItemRoutes = require("./routes/my-listings-mark-item");
-// const contactRoutes = require("./routes/contact");
 const logoutRoutes = require("./routes/logout");
 
 
@@ -88,7 +87,6 @@ app.use("/login",loginRoutes(db));
 // Note: mount other resources here, using the same pattern above
 app.use("/listings", removeListingRoutes(db));
 app.use("/listings", markItemRoutes(db));
-// app.use("/contact", contactRoutes(db));
 app.use("/logout", logoutRoutes(db));
 app.use("/message",newMessageRoutes(db));
 app.use("/messages",messageRoutes(db));
