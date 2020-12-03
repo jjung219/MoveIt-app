@@ -1,9 +1,20 @@
 // See: https://sass-lang.com/
 
 body {
-  background-color: #EEE;
+  background-color: #eee;
+
+  .container {
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+    min-height: 100vh;
+  }
 
   h1 {
     color: #244751;
+  }
+
+  footer {
+    bottom: 0px;
+    width: 100%;
   }
 }

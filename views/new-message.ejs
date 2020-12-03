@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Login Page</title>
+  <title>Create New Message</title>
 
   <%- include('partials/_links') %>
 
@@ -25,25 +25,19 @@
   <main>
     <div class="container">
       <div class="text-center">
-        <h1>Login</h1>
+        <h1>Send Message</h1>
       </div>
-      <form action="/login" method="POST">
+      <form action="/message/<%= item_id %>" method="POST">
         <div class="form-group">
-          <h5><label for="email">Email address</label></h5>
-          <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"
-            name="email">
-        </div>
-        <div class="form-group">
-          <h5><label for="password">Password</label></h5>
-          <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+          <h5><label for="inputDescription">Message</label></h5>
+          <textarea class="form-control" placeholder="Enter message..." rows="5" name="content"></textarea>
         </div>
         <div class="text-center">
-          <button type="submit" class="btn btn-lg btn-primary">Login</button>
+          <button type="submit" class="btn btn-lg btn-primary">Send</button>
         </div>
       </form>
     </div>
   </main>
-
 
   <!-- Footer & Bootstrap core JavaScript-->
   <%- include('partials/_footer') %>

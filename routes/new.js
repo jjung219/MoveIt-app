@@ -6,8 +6,16 @@ module.exports = (db) => {
   const helpers = initHelpers(db);
   router.get("/", (req, res) => {
     const userId = req.session['user_id'];
-    const templateVars = { user: userId };
-    res.render("new", templateVars);
+    const queryString = `SELECT * FROM users WHERE id = $1`
+
+    db
+      .query (queryString, [userId])
+      .then(result => {
+        const userInfo = result.rows[0];
+        templateVars = {user: userInfo}
+        return res.render("new", templateVars);
+      })
+      .catch(err => console.log('Error: ', err.stack))
   });
 
   router.post("/", (req, res) => {

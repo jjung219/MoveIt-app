@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Search</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link href="../css/shop-homepage.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <title>Search</title>
 
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <%- include('partials/_links') %>
 
-  </head>
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+</head>
 
-  <body>
+<body>
+  <header>
     <!-- Navigation -->
     <%- include('partials/_header') %>
+  </header>
   <!-- Search -->
-  <div>
-    <h1>Need to be deleted later</h1>
-    <h1>Search</h1>
-    <form method="POST" action="/">
-      <div class="form-group">
-        <label for="item-name">Name</label>
-        <input id ="item-name" type="text" class="form-control" name="item-name">
-      </div>
-      <div class="input-group mb-3">
-        <label for="minimum-price">Minimum-price</label>
-        <input id="minimum-price" type="number" class="form-control" name="min-price" aria-label="Dollar amount (with dot and two decimal places)">
-        <div class="input-group-prepend">
-          <span class="input-group-text">$</span>
-          <span class="input-group-text">0.00</span>
-        </div>
-      </div>
-      <div class="input-group">
-        <label for="maximum-price">Maximum-price</label>
-        <input id="maximum-price" type="number" class="form-control" name="max-price" aria-label="Dollar amount (with dot and two decimal places)">
-        <div class="input-group-append">
-          <span class="input-group-text">$</span>
-          <span class="input-group-text">0.00</span>
-        </div>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
+  <main id="search">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
+      <div class="text-center">
+        <h1>Search</h1>
+      </div>
+      <form method="POST" action="/">
+        <div class="form-group">
+          <h6><label for="item-name">Name</label></h6>
+          <input id="item-name" type="text" class="form-control" name="item-name" placeholder="Search for item...">
+        </div>
+        <div class="input-group mb-3">
+          <h6><label for="minimum-price">Minimum Price: </label></h6>
+          <input id="minimum-price" type="number" class="form-control" name="min-price"
+            aria-label="Dollar amount (with dot and two decimal places)">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <h6><label for="maximum-price">Maximum Price: </label></h6>
+          <input id="maximum-price" type="number" class="form-control" name="max-price"
+            aria-label="Dollar amount (with dot and two decimal places)">
+          <div class="input-group-append">
+            <span class="input-group-text">$</span>
+            <span class="input-group-text">.00</span>
+          </div>
+        </div>
+        <div class="text-center">
+          <button type="submit" class="btn btn-lg btn-primary">Search</button>
+        </div>
+      </form>
     </div>
-  <!-- /.container -->
-  </footer>
+  </main>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  </body>
+  <!-- Footer & Bootstrap core JavaScript-->
+  <%- include('partials/_footer') %>
+
+</body>
+
 </html>

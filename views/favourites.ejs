@@ -7,29 +7,21 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Home Page</title>
+  <title>My Favourites</title>
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link href="../css/shop-homepage.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-    crossorigin="anonymous" />
+  <%- include('partials/_links') %>
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
     integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
     crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/f4a4038515.js" crossorigin="anonymous"></script>
 
 </head>
 
 <body>
-  <!-- Navigation -->
-  < <header>
+  <header>
     <%- include('partials/_header') %>
     </header>
     <body>
@@ -59,9 +51,25 @@
                 </div>
               </div>
             </div>
-            <% } %>
-    </body>
+            <span> <button>message</button></span>
+            <div class="card-footer">
+              <small>
+                <form method="POST" action="/favourites"><button>favourit</button></form>
+              </small>
+              <small>condition = <%= itemsArr[item].condition %></small>
+              <% if (itemsArr[item].active) { %>
+              <small>For Sale</small>
+              <% } else { %>
+              <span style="color: red;">SOLD</span>
+              <% } %>
+            </div>
+          </div>
+          <% } %>
+  </main>
+
+
+  <!-- Footer & Bootstrap core JavaScript-->
+  <%- include('partials/_footer') %>
+</body>
 
 </html>
-
-<!--  -->
