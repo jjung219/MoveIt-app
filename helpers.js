@@ -7,10 +7,11 @@ module.exports = (db) => {
   }
 
   const checkUserAuth = function (email, password) {
-    return db.query(`SELECT * FROM users WHERE  email=$1 AND password= $2`, [email, password])
+    return db.query(`SELECT * FROM users WHERE email=$1 AND password= $2`, [email, password])
       .then(user => user.rows[0])
       .catch(err => console.log(err));
   }
+
 
   const addNewUser = function (name, email, password) {
     return db.query(`INSERT INTO users(name,email,password) VALUES($1,$2,$3) RETURNING *`, [name, email, password])
@@ -29,8 +30,8 @@ module.exports = (db) => {
       .catch(err => console.log(err));
   }
 
-  const newMessage = function (sender_email,sender_id,item_id,message,receiver_id) {
-    return db.query(`INSERT INTO messages(sender_email,sender_id,item_id,content,receiver_id) VALUES($1,$2,$3,$4,$5) RETURNING *`, [sender_email,sender_id,item_id,message,receiver_id])
+  const newMessage = function (sender_email, sender_id, item_id, message, receiver_id) {
+    return db.query(`INSERT INTO messages(sender_email,sender_id,item_id,content,receiver_id) VALUES($1,$2,$3,$4,$5) RETURNING *`, [sender_email, sender_id, item_id, message, receiver_id])
       .then(res => res.rows[0])
       .catch(err => console.log(err));
   }
@@ -39,10 +40,10 @@ module.exports = (db) => {
       .then(res => res.rows[0])
       .catch(err => console.log(err));
   }
-  const getReceiverId = function(item_id){
-    return db.query(`SELECT user_id FROM items WHERE items.id=$1`,[item_id])
-    .then(res=>res.rows[0])
-    .catch(err=>console.log(err));
+  const getReceiverId = function (item_id) {
+    return db.query(`SELECT user_id FROM items WHERE items.id=$1`, [item_id])
+      .then(res => res.rows[0])
+      .catch(err => console.log(err));
   }
 
 

@@ -24,7 +24,9 @@
   <header>
     <%- include('partials/_header') %>
   </header>
-  <div class="container">
+  <main>
+
+    <div class="container">
 
     <div class="row">
 
@@ -54,6 +56,7 @@
 
       <div class="col-lg-9">
 
+<<<<<<< HEAD
         <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -97,6 +100,17 @@
                 <h5>$<%= itemsArr[item].price %></h5>
                 <p class="card-text"><%= itemsArr[item].description %></p>
                 <p class="card-text">Condition: <%= itemsArr[item].condition %></p>
+=======
+          <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-item active">
+                <img class="d-block img-fluid" src="styles/img/logo3.png">
+>>>>>>> fb46a497462b7246d15f2a169b1d2067a7956543
               </div>
               <div class="card-footer">
                 <% if (itemsArr[item].active) { %>
@@ -115,6 +129,7 @@
               </div>
             </div>
           </div>
+<<<<<<< HEAD
           <% } %>
         </div>
         <!-- END -->
@@ -168,5 +183,59 @@
         <!-- Footer & Bootstrap core JavaScript-->
         <%- include('partials/_footer') %>
 </body>
+=======
+
+          <!-- NEEED TO FIX BOOTSTRAP -->
+          <div class="row">
+          <%  for(let item in itemsArr) { %>
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a href="#"><img class="card-img-top" src="<%= itemsArr[item].photo_url %>"> </a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="#"><%= itemsArr[item].name %></a>
+                  </h4>
+                  <h5>$<%= itemsArr[item].price %></h5>
+                  <p class="card-text"><%= itemsArr[item].description %></p>
+                  <p class="card-text">Condition: <%= itemsArr[item].condition %></p>
+                </div>
+                <div class="card-footer">
+                  <% if (itemsArr[item].active) { %>
+                    <span>Available</span>
+                  <% } else { %>
+                  <span style="color: red;">SOLD</span>
+                  <% } %>
+                  <% favourited = false %>
+                  <%  for(let favs in favIds) { %>
+                    <% if (itemsArr[item].id === favIds[favs].id) { favourited = true }%>
+                    <% } %>
+                    <% if (favourited === true) { %>
+                    <small>
+                      <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete">
+                        <button><i class="fas fa-heart fa-2x"></i></button>
+                      </form>
+                    </small>
+                    <% } else { %>
+                    <small>
+                      <form method="POST" action="/favourites/<%= itemsArr[item].id %>">
+                        <button><i class="far fa-heart fa-2x"></i></button>
+                      </form>
+                    </small>
+                    <% } %>
+                </div>
+                <div class="card-footer btn">
+                  <form action="/message/<%= itemsArr[item].id %>">
+                    <button type="submit" class="btn btn-primary">Message</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          <% } %>
+          <!-- END -->
+
+      </div>
+    </div>
+  </main>
+>>>>>>> fb46a497462b7246d15f2a169b1d2067a7956543
 
 </html>

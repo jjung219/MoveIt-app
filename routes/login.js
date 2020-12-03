@@ -12,23 +12,22 @@ module.exports = (db) => {
 
   });
 
-
-  router.post("/",(req,res)=>{
-const {email,password}  = req.body;
- console.log(email,password)
- helpers.checkUserAuth(email,password)
-.then(user=>{
-if(!user){
-  res.send("Invalid details")
-}else{
- helpers.getUserwithEmail(email)
-  .then(user=>{
-    req.session['user_id'] = user.id;
-    res.redirect("/")
-  })
-}
+  router.post("/", (req, res) => {
+    const { email, password } = req.body;
+    //  console.log(email,password)
+    helpers.checkUserAuth(email, password)
+      .then(user => {
+        if (!user) {
+          res.send("Invalid details")
+        } else {
+          helpers.getUserwithEmail(email)
+            .then(user => {
+              req.session['user_id'] = user.id;
+              res.redirect("/")
+            })
+        }
+      });
   });
-});
   return router;
 }
 
