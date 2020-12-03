@@ -4,7 +4,7 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     const userId = req.session['user_id'];
-    let templateVars = { user: {}, items: {} };
+    let templateVars = { user: {name: ''}, items: {} };
 
     const queryString = `
       SELECT users.name as user, items.*
@@ -23,10 +23,13 @@ module.exports = (db) => {
       .query(queryString, queryParams)
       .then(result => {
         const items = result.rows;
-        console.log(items);
+        // templateVars.user.name = items[0].user;
+        console.log(items[0].user);
         for (item of items) {
           templateVars.items[item.id] = item;
         }
+        console.log(templateVars)
+        templateVars['user'].name = items[0].user
         return res.render('my-listings', templateVars);
       })
       .catch(err => console.log('Error: ', err.stack));
@@ -35,23 +38,3 @@ module.exports = (db) => {
 
   return router;
 };
-
-
-//Only render items of the user that is logged in
-//Remove button needs to only delete items if the user id matches the user_id of the items
-
-// Edge Cases:
-// if userId is not present
-
-// const userId = req.session['user_id'];
-// const queryString = `SELECT * FROM users WHERE id = $1`
-
-// db
-//   .query (queryString, [userId])
-//   .then(result => {
-//     const userInfo = result.rows[0];
-//     templateVars = {user: userInfo}
-//     console.log(userInfo)
-//     return res.render("search", templateVars);
-//   })
-//   .catch(err => console.log('Error: ', err.stack))
