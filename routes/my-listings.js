@@ -6,7 +6,6 @@ module.exports = (db) => {
     const userId = req.session['user_id'];
     let templateVars = { user: {}, items: {} };
 
-
     const queryString = `
       SELECT users.name as user, items.*
       FROM items
@@ -24,10 +23,10 @@ module.exports = (db) => {
       .query(queryString, queryParams)
       .then(result => {
         const items = result.rows;
+        console.log(items);
         for (item of items) {
           templateVars.items[item.id] = item;
         }
-        templateVars.user['name'] = items[0].user;
         return res.render('my-listings', templateVars);
       })
       .catch(err => console.log('Error: ', err.stack));
