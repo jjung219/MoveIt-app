@@ -106,7 +106,7 @@ app.get("/", (req, res) => {
   .then(result => {
     userId = req.session['user_id']
     items = (result.rows);
-    templateVar = { itemsArr: items, user: userId}
+    templateVar = { itemsArr: items}
     queryString = `SELECT items.id, favorites.user_id as favorited_by
     FROM items
     join favorites on favorites.item_id = items.id
@@ -117,8 +117,14 @@ app.get("/", (req, res) => {
       favouritesIds = result.rows
       templateVar.favourited = false
       templateVar.favIds = favouritesIds
-      console.log(templateVar)
-      res.render('index', templateVar)
+      db
+        .query(`SELECT * FROM users WHERE id = $1`, [userId])
+        .then((result) => {
+          const userInfo = result.rows[0];
+          templateVar['user'] = userInfo;
+
+          res.render('index', templateVar)
+        })
     })
   })
   .catch(e => console.log(e.stack))
