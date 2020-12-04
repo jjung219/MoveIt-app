@@ -20,11 +20,18 @@
 
 </head>
 
+
+
+
 <body>
-  <header>
+    <header>
     <%- include('partials/_header') %>
     </header>
-    <body>
+    <main id="my-listings">
+      <div class="container">
+        <div id="my-listings-header" class="text-center">
+          <h1>My Listings</h1>
+        </div>
       <%  for(let item in itemsArr) { %>
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
@@ -36,35 +43,24 @@
                   </h4>
                   <h5>$<%= itemsArr[item].price %></h5>
                   <p class="card-text"><%= itemsArr[item].description %></p>
+                  <h6>Condition: <%= itemsArr[item].condition %></h6>
                 </div>
-                <span> <button>message</button></span>
                 <div class="card-footer">
+                  <% if (itemsArr[item].active) {%>
+                    <span>Available</span>
+                  <%} else {%>
+                    <span style="color: red;">SOLD</span>
+                  <%}%>
                       <small>
-                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete?redirect=/favourites"><button>favourited</button></form>
+                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete?redirect=/favourites"><button><i class="fas fa-heart fa-2x"></i></button></form>
                       </small>
-                  <small>condition = <%= itemsArr[item].condition %></small>
-                  <% if (itemsArr[item].active) { %>
-                  <small>For Sale</small>
-                  <% } else { %>
-                  <span style="color: red;">SOLD</span>
-                  <% } %>
                 </div>
               </div>
             </div>
-            <span> <button>message</button></span>
-            <div class="card-footer">
-              <small>
-                <form method="POST" action="/favourites"><button>favourit</button></form>
-              </small>
-              <small>condition = <%= itemsArr[item].condition %></small>
-              <% if (itemsArr[item].active) { %>
-              <small>For Sale</small>
-              <% } else { %>
-              <span style="color: red;">SOLD</span>
-              <% } %>
             </div>
           </div>
           <% } %>
+        </div>
   </main>
 
 

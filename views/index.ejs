@@ -87,7 +87,7 @@
         </div>
 
         <!-- BOOTSTRAP FIXED -->
-        <div class="row">
+        <!-- <div class="row">
           <%  for(let item in itemsArr) { %>
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
@@ -118,7 +118,7 @@
             </div>
           </div>
           <% } %>
-        </div>
+        </div> -->
         <!-- END -->
 
 
@@ -134,32 +134,36 @@
                   </h4>
                   <h5>$<%= itemsArr[item].price %></h5>
                   <p class="card-text"><%= itemsArr[item].description %></p>
+                  <p class="card-text">Condition: <%= itemsArr[item].condition %></p>
                 </div>
-                <span> <button>message</button></span>
                 <div class="card-footer">
+                  <% if (itemsArr[item].active) { %>
+                    <span>Available</span>
+                    <% } else { %>
+                    <span style="color: red;">SOLD</span>
+                    <% } %>
                  <% if (favIds.includes(itemsArr[item].id)) {%>
                       <small>
-                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete"><button>favourited</button></form>
+                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete"><button><i class="fas fa-heart fa-2x"></i></button></form>
                       </small>
                       <% } else { %>
                       <small>
-                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>"><button>not favourited</button></form>
+                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>"><button><i class="far fa-heart" style="font-size: large;"></i></button></form>
                       </small>
                       <% } %>
-                  <small>condition = <%= itemsArr[item].condition %></small>
-                  <% if (itemsArr[item].active) { %>
-                  <small>For Sale</small>
-                  <% } else { %>
-                  <span style="color: red;">SOLD</span>
-                  <% } %>
                 </div>
+                  <div class="card-footer btn">
+                <form action="/message/<%= itemsArr[item].id %>">
+                  <button type="submit" class="btn btn-primary">Message</button>
+                </form>
               </div>
+              </div>
+            </div>
               <% } %>
               <!-- END -->
 
-            </div>
           </div>
-        </div>
+
 
 
         <!-- Footer & Bootstrap core JavaScript-->
