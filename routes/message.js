@@ -28,7 +28,7 @@ module.exports = (db) => {
               console.log(email, receiver_id)
               helpers.newMessage(email.email, sender_id, item_id, content, receiver_id.user_id)
                 .then(message => {
-                  res.render("temp_message", { message: "Message sent", nextPage: "/" })
+                  res.render("temp_message", { message: "Message sent", nextPage: "/" });
                 })
             })
         })

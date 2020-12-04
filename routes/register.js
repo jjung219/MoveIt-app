@@ -9,7 +9,6 @@ const express = require('express');
 const router = express.Router();
 const initHelpers = require('../helpers.js');
 
-
 module.exports = (db) => {
   const helpers = initHelpers(db);
   router.get("/", (req, res) => {
@@ -18,7 +17,6 @@ module.exports = (db) => {
 
     res.render("register", templateVars);
   });
-
 
   router.post("/", (req, res) => {
     const userName = req.body.userName;
@@ -33,27 +31,13 @@ module.exports = (db) => {
               console.log(`test:${userId}`);
               req.session.user_id = userId;
               console.log(req.session);
-              res.redirect("/")
+              res.redirect("/");
             });
         } else {
-          res.send("user already exist")
+          res.send("<h1>user already exist</h1>");
         }
       });
   });
   return router;
 };
 
-//.get ---'/'
-// .get ---'/register'
-// .post ----'/register'
-// .get ---'/login'
-// .post----'/login'
-// .get ----'/listings'------get all the listings
-// .post ---'/listings'------create a new listing
-// .get ----'/listings/:user_id------listings of a particular userId
-// .get ----'/listings/:item_id'------particular listing
-// .get ----'/listings/favourites'------ view favourite listings
-// .post --- '/listings/item_id/delete'---------delete a particular listing
-// .post ---'/listings/item_id/edit'------edit a  listing
-// .get---'/listings/new'---------go to a form to create a new listing
-// .post ---'/logout'-----------logout

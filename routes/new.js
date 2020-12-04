@@ -15,7 +15,7 @@ module.exports = (db) => {
         templateVars = {user: userInfo}
         return res.render("new", templateVars);
       })
-      .catch(err => console.log('Error: ', err.stack))
+      .catch(err => console.log('Error: ', err.stack));
   });
 
   router.post("/", (req, res) => {

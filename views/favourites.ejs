@@ -30,7 +30,7 @@
     <main id="my-listings">
       <div class="container">
         <div id="my-listings-header" class="text-center">
-          <h1>My Favourites</h1>
+          <h1 style="color: #F5FFFA;">My Favourites</h1>
         </div>
         <div class="row">
         <%  for(let item in itemsArr) { %>
@@ -47,12 +47,12 @@
                 </div>
                 <div class="card-footer">
                   <% if (itemsArr[item].active) {%>
-                    <span>Available</span>
+                    <span class="available">Available</span>
                   <%} else {%>
                     <span style="color: red;">SOLD</span>
                   <%}%>
                     <small>
-                      <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete?redirect=/favourites"><button><i class="fas fa-heart fa-2x"></i></button></form>
+                      <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete?redirect=/favourites"><button><i class="fas fa-heart fa-2x" style="color: red;"></i></button></form>
                     </small>
                 </div>
             </div>

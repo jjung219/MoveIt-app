@@ -30,7 +30,7 @@
     <main id="my-listings">
       <div class="container">
         <div id="my-listings-header" class="text-center">
-          <h1>My Listings</h1>
+          <h1 style="color: #F5FFFA;">My Listings</h1>
         </div>
         <div class="row">
           <% for (let item in items) {%>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="card-footer">
                   <% if (items[item].active) {%>
-                    <span>Available</span>
+                    <span class="available">Available</span>
                   <%} else {%>
                     <span style="color: red;">SOLD</span>
                   <%}%>
