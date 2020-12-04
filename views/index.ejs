@@ -109,11 +109,11 @@
                     <% } %>
                  <% if (favIds.includes(itemsArr[item].id)) {%>
                       <small>
-                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete"><button><i class="fas fa-heart fa-2x"></i></button></form>
+                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>/delete"><button><i class="fas fa-heart fa-2x" style="color: red;"></i></button></form>
                       </small>
                       <% } else { %>
                       <small>
-                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>"><button><i class="far fa-heart" style="font-size: large;"></i></button></form>
+                        <form method="POST" action="/favourites/<%= itemsArr[item].id %>"><button><i class="far fa-heart" style="font-size: large; color: red"></i></button></form>
                       </small>
                       <% } %>
                 </div>
