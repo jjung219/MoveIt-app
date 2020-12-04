@@ -105,7 +105,7 @@ app.get("/", (req, res) => {
   .then(result => {
     userId = req.session['user_id']
     items = (result.rows);
-    templateVar = { itemsArr: items, user: {}}
+    templateVar = { itemsArr: items, user: userId}
     queryString = `SELECT item_id, users.*
     FROM favorites
     JOIN users ON user_id = users.id
@@ -116,7 +116,6 @@ app.get("/", (req, res) => {
       favouritesIds = result.rows
       templateVar.favourited = false
       templateVar.favIds = favouritesIds.map(itemFav => itemFav.item_id)
-      templateVar.user.name = result.rows[0].name
 
       console.log(templateVar)
       res.render('index', templateVar)
