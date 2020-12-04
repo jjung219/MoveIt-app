@@ -17,15 +17,8 @@ module.exports = (db) => {
     .then(result => {
       let userId = req.session['user_id'];
       items = (result.rows);
-      templateVar = { itemsArr: items, user: {}}
-
-      db
-        .query(`SELECT * FROM users WHERE id = $1`, [userId])
-        .then((result) => {
-          const userInfo = result.rows[0];
-          templateVar.user = userInfo;
-          return res.render('favourites', templateVar);
-        })
+      templateVar = { itemsArr: items, user: userId}
+      res.render('favourites', templateVar)
 
     })
     .catch(e => console.log(e.stack));
